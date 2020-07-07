@@ -22,14 +22,14 @@ public class PageResult {
      */
     private Object data;
 
-    private int totalcount;
+    private int totalCount;
 
-    public int getTotalcount() {
-        return totalcount;
+    public int getTotalCount() {
+        return totalCount;
     }
 
-    private void setTotalcount(int totalcount) {
-        this.totalcount = totalcount;
+    private void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
     }
 
     public int getCode() {
@@ -67,7 +67,7 @@ public class PageResult {
         PageResult jsonResult = new PageResult();
         jsonResult.setCode(code);
         jsonResult.setData(data);
-        jsonResult.setTotalcount(totalCount);
+        jsonResult.setTotalCount(totalCount);
         return jsonResult;
     }
 
