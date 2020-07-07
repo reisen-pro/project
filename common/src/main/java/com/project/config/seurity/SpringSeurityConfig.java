@@ -1,4 +1,4 @@
-package com.project.config;
+package com.project.config.seurity;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -29,6 +29,7 @@ public class SpringSeurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 设置认证信息的提供方，这里使用基于数据库的方式提供认证信息的管理
+     *
      * @param auth 用于构建认证提供方
      * @throws Exception
      */
@@ -50,6 +51,7 @@ public class SpringSeurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * SpringSecurity的具体配置
+     *
      * @param http 相当于xml中http节点下的配置信息
      * @throws Exception
      */
