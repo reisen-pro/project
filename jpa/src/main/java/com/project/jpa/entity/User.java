@@ -1,5 +1,6 @@
 package com.project.jpa.entity;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 @Setter
 @Table(name = "user")
 @Entity
+@Builder
 public class User implements Serializable {
     @Id
     private Long id;

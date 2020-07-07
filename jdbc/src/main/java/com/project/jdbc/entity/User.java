@@ -1,5 +1,6 @@
 package com.project.jdbc.entity;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(value = "user")
+@Builder
 public class User implements Serializable {
     private static final long serialVersionUID = -3982101350948523161L;
     @Id
@@ -24,6 +26,4 @@ public class User implements Serializable {
     private String password;
     private LocalDateTime create_date;
     private LocalDateTime modify_date;
-
-
 }
