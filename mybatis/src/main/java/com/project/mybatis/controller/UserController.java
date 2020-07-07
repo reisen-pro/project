@@ -26,7 +26,7 @@ public class UserController {
         return dao.userList();
     }
 
-    @GetMapping(value = "find/{id}")
+    @PostMapping(value = "find/{id}")
     public User user(@PathVariable Long id) {
         return dao.findById(id);
     }
