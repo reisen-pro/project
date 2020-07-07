@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 @Setter
 @Table(name = "user")
 @Entity
-@Builder
 public class User implements Serializable {
     @Id
     private Long id;

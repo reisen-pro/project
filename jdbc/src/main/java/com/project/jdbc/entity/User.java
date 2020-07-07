@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(value = "user")
-@Builder
 public class User implements Serializable {
     private static final long serialVersionUID = -3982101350948523161L;
     @Id
