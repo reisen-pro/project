@@ -1,6 +1,7 @@
 package com.project.base.collection;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * 集合扩容时间测试
@@ -33,7 +34,5 @@ public class ListExpansion {
         }
         long endTime2 = System.currentTimeMillis();
         System.out.println("设置初始容量后：" + (endTime2 - startTime2));
-
-
     }
 }
