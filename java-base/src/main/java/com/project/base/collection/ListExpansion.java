@@ -2,6 +2,9 @@ package com.project.base.collection;
 
 import java.util.ArrayList;
 
+/**
+ * 集合扩容时间测试
+ */
 public class ListExpansion {
     public static void main(String[] args) {
         ArrayList<Object> list = new ArrayList<>();
