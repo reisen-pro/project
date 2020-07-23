@@ -17,6 +17,20 @@
         <druid.version>1.1.10</druid.version>
     </properties>
 
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>nexus-aliyun</id>-->
+<!--            <name>nexus-aliyun</name>-->
+<!--            <url>https://maven.aliyun.com/repository/spring/</url>-->
+<!--            <releases>-->
+<!--                <enabled>true</enabled>-->
+<!--            </releases>-->
+<!--            <snapshots>-->
+<!--                <enabled>false</enabled>-->
+<!--            </snapshots>-->
+<!--        </repository>-->
+<!--    </repositories>-->
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -121,5 +135,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

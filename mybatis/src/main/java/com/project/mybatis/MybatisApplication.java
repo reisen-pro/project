@@ -1,13 +1,7 @@
 package com.project.mybatis;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-
-/**
- * @author Reisen
- */
 
 /**
  *  druid监控页面是一个servlet，需要让SpingBoot支持servlet.在程序入口添加注解 @ServletComponentScan
