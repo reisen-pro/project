@@ -6,7 +6,7 @@ package com.project.base.threadpool;
  */
 public class ThreadDemo extends Thread {
 
-    private static int num = 5000;
+    private static int num = 50;
 
     private final Object object = new Object();
 
@@ -16,14 +16,15 @@ public class ThreadDemo extends Thread {
             // 加在while里面 如果加在while上面顺序有的时候会乱
             synchronized (object) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                // 这里也要加 上面的锁粒度可能不够 仅仅加上面的
-                synchronized (object) {
-                    System.out.println(getName() + " " + num--);
-                }
+            }
+            // 这里也要加 上面的锁粒度可能不够 仅仅加上面的
+            System.out.println(getName() + " " + num);
+            synchronized (object) {
+                num--;
             }
         }
     }
