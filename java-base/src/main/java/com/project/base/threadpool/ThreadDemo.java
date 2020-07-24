@@ -7,7 +7,7 @@ public class ThreadDemo extends Thread {
 
     private static int num = 50;
 
-    private Object object;
+    private final Object object;
 
     private String name;
 
@@ -19,13 +19,10 @@ public class ThreadDemo extends Thread {
     @Override
     public void run() {
         synchronized (object) {
-            while (true) {
+            do {
                 System.out.println(name + "---" + num);
                 num--;
-                if (num < 1) {
-                    break;
-                }
-            }
+            } while (num >= 1);
         }
 
     }

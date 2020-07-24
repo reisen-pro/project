@@ -1,7 +1,6 @@
 package com.project.base.collection;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * 集合扩容时间测试
