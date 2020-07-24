@@ -2,30 +2,35 @@ package com.project.base.threadpool;
 
 public class RunnableDemo implements Runnable {
 
-    private String name;
-
-    private final Object object = new Object();
-
-    private RunnableDemo(String name) {
-        this.name = name;
-    }
-
     private static int sum = 50;
 
+    private final Object object;
+
+    private String name;
+
+    RunnableDemo(String name, Object o) {
+        this.name = name;
+        this.object = o;
+    }
+
     @Override
-    synchronized public void run() {
-        while (sum > 0) {
-            System.out.println(name + " -- " + sum);
+    public void run() {
+        while (true) {
             synchronized (object) {
+
+                System.out.println(name + " " + sum);
+                if (sum < 1) {
+                    break;
+                }
                 sum--;
             }
         }
     }
 
     public static void main(String[] args) {
-        RunnableDemo runnableDemo1 = new RunnableDemo("线程1");
-        RunnableDemo runnableDemo2 = new RunnableDemo("线程2");
-
+        Object obj = new Object();
+        RunnableDemo runnableDemo1 = new RunnableDemo("A", obj);
+        RunnableDemo runnableDemo2 = new RunnableDemo("B", obj);
         new Thread(runnableDemo1).start();
         new Thread(runnableDemo2).start();
     }

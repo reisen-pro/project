@@ -2,36 +2,38 @@ package com.project.base.threadpool;
 
 /**
  * 线程测试类
- * 加了两个synchronized之后，目前是比较稳定的
  */
 public class ThreadDemo extends Thread {
 
     private static int num = 50;
 
-    private final Object object = new Object();
+    private Object object;
+
+    private String name;
+
+    private ThreadDemo(String name, Object o) {
+        this.name = name;
+        this.object = o;
+    }
 
     @Override
     public void run() {
-        while (num > 0) {
-            // 加在while里面 如果加在while上面顺序有的时候会乱
-            synchronized (object) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+        synchronized (object) {
+            while (true) {
+                System.out.println(name + "---" + num);
+                num--;
+                if (num < 1) {
+                    break;
                 }
             }
-            // 这里也要加 上面的锁粒度可能不够 仅仅加上面的
-            System.out.println(getName() + " " + num);
-            synchronized (object) {
-                num--;
-            }
         }
+
     }
 
     public static void main(String[] args) {
-        ThreadDemo threadDemo1 = new ThreadDemo();
-        ThreadDemo threadDemo2 = new ThreadDemo();
+        Object obj = new Object();
+        ThreadDemo threadDemo1 = new ThreadDemo("A", obj);
+        ThreadDemo threadDemo2 = new ThreadDemo("B", obj);
         threadDemo1.start();
         threadDemo2.start();
     }
