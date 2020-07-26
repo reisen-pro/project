@@ -94,4 +94,7 @@
         </plugins>
     </build>
 
+    <modules>
+        <module>common</module>
+    </modules>
 </project>

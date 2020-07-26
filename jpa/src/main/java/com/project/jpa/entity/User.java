@@ -23,6 +23,15 @@ public class User implements Serializable {
     @Id
     private Long id;
     private String username;
+    private String usercode;
+    private String usercodeName;
+
+
+
+
+
+
+
     private String password;
     private LocalDateTime createdate;
     private LocalDateTime modifydate;
