@@ -5,9 +5,10 @@
 
 .idea
 
-target/#
 
-*.target
+.mvn
+
+target
 
 # Log file
 *.log
