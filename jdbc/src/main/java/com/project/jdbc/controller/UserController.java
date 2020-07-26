@@ -2,15 +2,16 @@ package com.project.jdbc.controller;
 
 import com.project.jdbc.dao.UserDao;
 import com.project.jdbc.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @author Reisen
  */
 @RestController
 public class UserController {
-    @Autowired
+    @Resource
     private UserDao dao;
 
     /**

@@ -5,7 +5,7 @@ package com.project.base.abstracttype;
  */
 public abstract class TypeAbstract {
 
-    public TypeAbstract() {
+    TypeAbstract() {
         System.out.println("父类实例化");
     }
 
@@ -13,7 +13,7 @@ public abstract class TypeAbstract {
         System.out.println("父类打印" + "\"" + "\"");
     }
 
-    public void print(String printStr) {
+    void print(String printStr) {
         System.out.println("父类打印" + printStr);
     }
 }

@@ -5,7 +5,7 @@ package com.project.base.abstracttype;
  */
 public class TypeAbstractExtends extends TypeAbstract {
 
-    public TypeAbstractExtends() {
+    private TypeAbstractExtends() {
         System.out.println("子类实例化");
     }
 

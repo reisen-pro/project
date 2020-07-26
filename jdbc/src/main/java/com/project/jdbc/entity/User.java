@@ -24,6 +24,4 @@ public class User implements Serializable {
     private String password;
     private LocalDateTime create_date;
     private LocalDateTime modify_date;
-
-
 }
