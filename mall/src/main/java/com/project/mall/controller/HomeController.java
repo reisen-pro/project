@@ -1,6 +1,7 @@
 package com.project.mall.controller;
 
 import com.project.mall.model.Banner;
+import com.project.mall.model.Good;
 import com.project.mall.model.Recommend;
 import com.project.mall.vo.JsonResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +24,10 @@ import java.util.Random;
 public class HomeController {
 
     @GetMapping(value = "multidata/banner")
-    public JsonResult getBanner(){
+    public JsonResult getBanner() {
 
         List<Banner> banners = new ArrayList<>();
-        for (int i = 0; i <4 ; i++) {
+        for (int i = 0; i < 4; i++) {
             Banner banner = new Banner();
             banner.setAcm("acm");
             banner.setHeight("390");
@@ -43,13 +44,13 @@ public class HomeController {
         banners.get(1).setImage("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1147802082,1925814848&fm=26&gp=0.jpg");
         banners.get(2).setImage("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2764719202,1230989758&fm=26&gp=0.jpg");
         banners.get(3).setImage("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=619078458,729041834&fm=11&gp=0.jpg");
-        return JsonResult.buildSuccess(200,banners);
+        return JsonResult.buildSuccess(200, banners);
     }
 
     @GetMapping(value = "multidata/recommend")
-    public JsonResult getRecommend(){
-        List<Recommend>  recommends = new ArrayList<>();
-        for (int i = 0; i <4 ; i++) {
+    public JsonResult getRecommend() {
+        List<Recommend> recommends = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
             Recommend recommend = new Recommend();
             recommend.setAcm("acm");
             recommend.setHeight("390");
@@ -61,11 +62,35 @@ public class HomeController {
             recommend.setWidth("750");
             recommends.add(recommend);
         }
-        for (int i = 0; i <4 ; i++) {
+        for (int i = 0; i < 4; i++) {
             Random random = new Random();
             int id = random.nextInt(1000);
-            recommends.get(i).setImage("https://picsum.photos/id/"+id+"/200/200");
+            recommends.get(i).setImage("https://picsum.photos/id/" + id + "/200/200");
         }
-        return JsonResult.buildSuccess(200,recommends);
+        return JsonResult.buildSuccess(200, recommends);
+    }
+
+    @GetMapping(value = "data")
+    public JsonResult getGoods(String type, int page) {
+        System.out.println(type);
+        System.out.println(page);
+        List<Good> goods = new ArrayList<>();
+        for (int i = 0; i < 60; i++) {
+            Good good = new Good();
+            good.setPrice("60");
+            if ("pop".equals(type)){
+                good.setImg("https://picsum.photos/id/" + (i+10) + "/200/200");
+            }
+            if ("news".equals(type)){
+                good.setImg("https://picsum.photos/id/" + (i+110) + "/200/200");
+            }
+            if ("sell".equals(type)){
+                good.setImg("https://picsum.photos/id/" + (i+210) + "/200/200");
+            }
+            good.setCfav("27");
+            good.setTitle("这个是商品标题");
+            goods.add(good);
+        }
+        return JsonResult.buildSuccess(200, goods);
     }
 }

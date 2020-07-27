@@ -15,7 +15,6 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Banner {
     String acm;
     String height;
