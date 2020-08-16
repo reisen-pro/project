@@ -17,11 +17,12 @@ public class ItemInfo {
     String title;
     String newPrice;
     String oldPrice;
-    Integer discount;
+    String discount;
     Double lowNowPrice;
     String[] columns;
     List services;
     String desc;
     String discountBgColor;
-    Integer length;
+    DetailImage detailImage;
+    ShopInfo shopInfo;
 }

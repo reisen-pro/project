@@ -12,10 +12,15 @@ import lombok.Data;
 @Data
 public class ShopInfo {
     String allGoodsUrl;
-    Integer cFans;
-    Integer cSells;
+
+    String logo;
+    String name;
+    Integer fans;
+    Integer sells;
+    Double score;
+    Integer goodsCount;
     Boolean isMarked;
     Integer level;
-    String name;
+
 
 }
