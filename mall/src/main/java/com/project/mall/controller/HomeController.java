@@ -78,19 +78,22 @@ public class HomeController {
         for (int i = 0; i < 60; i++) {
             Good good = new Good();
             good.setPrice("60");
-            if ("pop".equals(type)){
-                good.setImg("https://picsum.photos/id/" + (i+10) + "/200/200");
+            if ("pop".equals(type)) {
+                good.setImg("https://picsum.photos/id/" + (i + 10) + "/200/200");
             }
-            if ("news".equals(type)){
-                good.setImg("https://picsum.photos/id/" + (i+110) + "/200/200");
+            if ("news".equals(type)) {
+                good.setImg("https://picsum.photos/id/" + (i + 110) + "/200/200");
             }
-            if ("sell".equals(type)){
-                good.setImg("https://picsum.photos/id/" + (i+210) + "/200/200");
+            if ("sell".equals(type)) {
+                good.setImg("https://picsum.photos/id/" + (i + 210) + "/200/200");
             }
             good.setCfav("27");
+            good.setId(""+i);
             good.setTitle("这个是商品标题");
+            good.setType(type);
             goods.add(good);
         }
         return JsonResult.buildSuccess(200, goods);
     }
+
 }

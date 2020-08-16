@@ -17,6 +17,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Good {
+    String id;
     String type;
     String title;
     String img;

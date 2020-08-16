@@ -2,6 +2,8 @@ package com.project.mall.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.util.List;
+
 /**
  * 通用的JSON返回类型
  *
@@ -21,6 +23,8 @@ public class JsonResult {
      * 如果是查询操作或一些也需要携带返回数据的操作，可以添加在data中
      */
     private Object data;
+
+    private List dataList;
 
 
     public int getCode() {
@@ -47,6 +51,14 @@ public class JsonResult {
         this.data = data;
     }
 
+    public List getDataList() {
+        return dataList;
+    }
+
+    public void setDataList(List dataList) {
+        this.dataList = dataList;
+    }
+
     /**
      * 用于构建成功时的JSON对象
      *
@@ -60,6 +72,7 @@ public class JsonResult {
         jsonResult.setData(data);
         return jsonResult;
     }
+
 
     /**
      * 用于构建失败时的JSON对象

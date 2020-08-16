@@ -10,12 +10,9 @@ public class JsonUtil {
 
     private Map map = new LinkedHashMap();
 
-    private String testJson = "[{\"id\":1,\"username\":\"Reisen\",\"password\":\"1234qwer!\","
-            + "\"createDate\":\"2020-05-24 01:46:41\",\"modifyDate\":\"2020-05-24 01:46:46\"}]";
-
     private String JsonToMap(String jsonStr) {
         if (jsonStr == null || "".equals(jsonStr.trim())) {
-            jsonStr = testJson;
+            return "";
         }
         //去头
         for (int i = 0; i < jsonStr.getBytes().length; i++) {
@@ -33,9 +30,10 @@ public class JsonUtil {
                 break;
             }
         }
+
         String[] jsonArray = jsonStr.split(",");
         for (String s : jsonArray) {
-            String[] keyValues = s.split(":");
+            String[] keyValues = s.split(":", 2);
             map.put(keyValues[0].replace('\"', ' ').trim(), keyValues[1].replace('\"', ' ').trim());
         }
         return "";
@@ -43,9 +41,11 @@ public class JsonUtil {
 
 
     public static void main(String[] args) {
+        String testJson = "[{\"id\":1,\"username\":\"name\",\"password\":\"123456\","
+                + "\"createDate\":\"2020-05-24 01:46:41\",\"modifyDate\":\"2020-05-24 01:46:46\"}]";
         JsonUtil util = new JsonUtil();
-        util.JsonToMap("");
+        util.JsonToMap(testJson);
         Map map = util.map;
-        System.out.println(map.get("username"));
+        System.out.println(map.get("modifyDate"));
     }
 }
