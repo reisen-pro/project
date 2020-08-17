@@ -1,13 +1,11 @@
 package com.project.mall.controller;
 
-import com.project.mall.dto.DetailImage;
-import com.project.mall.dto.ItemInfo;
-import com.project.mall.dto.Services;
-import com.project.mall.dto.ShopInfo;
+import com.project.mall.dto.*;
 import com.project.mall.vo.JsonResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +32,7 @@ public class DetailController {
         itemInfo.setTopImages(imageList);
 
 
-        itemInfo.setTitle("女装三折起");
+        itemInfo.setTitle("新款潮流女装");
         itemInfo.setDiscount("活动价");
         itemInfo.setNewPrice("￥59.00");
         itemInfo.setOldPrice("￥69.00");
@@ -51,26 +49,36 @@ public class DetailController {
         images.add(image1);
         images.add(image2);
         images.add(image3);
-        detailImage.setImageList(images);
+        detailImage.setDetailImage(images);
         detailImage.setDesc("desc");
         detailImage.setAnchor("anchor");
         detailImage.setKey("key");
 
         itemInfo.setDetailImage(detailImage);
 
-        String[] columns = {"销量 1580", "收藏33人", "默认快递"};
+        String[] columns = {"销量 15800", "收藏333人", "默认快递"};
         itemInfo.setColumns(columns);
 
         ShopInfo shopInfo = new ShopInfo();
         shopInfo.setLogo("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1828149217,1653444566&fm=26&gp=0.jpg");
-        shopInfo.setName("商家名称");
+        shopInfo.setName("女装专卖店");
         shopInfo.setFans(30);
         shopInfo.setSells(10);
-        shopInfo.setScore(4.9);
+
+        ArrayList scoreList = new ArrayList();
+        Score score1 = new Score("店铺人气",4.6,false);
+        Score score2 = new Score("店铺评价",4.9,true);
+        Score score3 = new Score("发货速度",4.6,false);
+        scoreList.add(score1);
+        scoreList.add(score2);
+        scoreList.add(score3);
+
+        shopInfo.setScore(scoreList);
         shopInfo.setGoodsCount(90);
         shopInfo.setAllGoodsUrl("goodsurl");
         shopInfo.setIsMarked(true);
         shopInfo.setLevel(4);
+        shopInfo.setSells(86000);
 
         itemInfo.setShopInfo(shopInfo);
 

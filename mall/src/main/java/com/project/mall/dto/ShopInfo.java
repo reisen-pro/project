@@ -2,6 +2,8 @@ package com.project.mall.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author Reisen
  * @title: ShopInfo
@@ -17,7 +19,7 @@ public class ShopInfo {
     String name;
     Integer fans;
     Integer sells;
-    Double score;
+    List<Score> score;
     Integer goodsCount;
     Boolean isMarked;
     Integer level;

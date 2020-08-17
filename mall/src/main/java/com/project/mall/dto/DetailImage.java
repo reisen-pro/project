@@ -16,5 +16,5 @@ public class DetailImage {
     String desc;
     String anchor;
     String key;
-    List imageList;
+    List detailImage;
 }

@@ -62,12 +62,12 @@ public class HomeController {
             recommend.setWidth("750");
             recommends.add(recommend);
         }
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i <4 ; i++) {
             Random random = new Random();
             int id = random.nextInt(1000);
-            recommends.get(i).setImage("https://picsum.photos/id/" + id + "/200/200");
+            recommends.get(i).setImage("https://picsum.photos/id/"+id+"/200/200");
         }
-        return JsonResult.buildSuccess(200, recommends);
+        return JsonResult.buildSuccess(200,recommends);
     }
 
     @GetMapping(value = "data")
