@@ -1,7 +1,7 @@
-package com.project.jpa.controller;
+package com.project.jdbc.controller;
 
-import com.project.jpa.dao.UserDao;
-import com.project.jpa.entity.User;
+import com.project.jdbc.dao.UserDao_jpa;
+import com.project.jdbc.entity.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,27 +11,27 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-public class UserController {
+public class UserController_jpa {
     @Resource
-    private UserDao userDao;
+    private UserDao_jpa userDao;
 
     /**
      * [{"id":1,"username":"Reisen","password":"1234qwer!!","createDate":"2020-05-24T01:46:41","modifyDate":"2020-05-24T01:46:46"}]
      * localDateTime 会显示一个T不符合观看习惯
-     * @see com.project.mybatis.config
+     * @see com.project.jdbc.config.LocalDateTimeConfig
      */
 
-    @GetMapping(value = "findAll")
+    @GetMapping(value = "jpa/findAll")
     public List<User> userList() {
         return userDao.findAll();
     }
 
-    @GetMapping(value = "find/{id}")
+    @GetMapping(value = "jpa/find/{id}")
     public User user(@PathVariable Long id) {
         return userDao.findById(id).orElse(new User());
     }
 
-    @PatchMapping(value = "updatePwd/{password}/{id}")
+    @PatchMapping(value = "jpa/updatePwd/{password}/{id}")
     public void updatePwdById(@PathVariable String password, @PathVariable Long id) {
         userDao.updatePwdById(password, id);
     }

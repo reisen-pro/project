@@ -1,7 +1,7 @@
-package com.project.mybatis.mapper;
+package com.project.jdbc.mapper;
 
 
-import com.project.mybatis.entity.User;
+import com.project.jdbc.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;

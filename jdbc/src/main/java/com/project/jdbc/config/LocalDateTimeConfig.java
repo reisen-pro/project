@@ -1,4 +1,4 @@
-package com.project.mybatis.config;
+package com.project.jdbc.config;
 
 
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;

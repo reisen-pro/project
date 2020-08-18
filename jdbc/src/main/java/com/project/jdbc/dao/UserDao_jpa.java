@@ -1,13 +1,13 @@
-package com.project.jpa.dao;
+package com.project.jdbc.dao;
 
-import com.project.jpa.entity.User;
+import com.project.jdbc.entity.User;
+import org.springframework.data.jdbc.repository.query.Modifying;
+import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface UserDao extends JpaRepository<User, Long> {
+public interface UserDao_jpa extends JpaRepository<User, Long> {
     /**
      * 根据id修改密码
      * 要加@Param注解入参 org.springframework.data.repository.query下

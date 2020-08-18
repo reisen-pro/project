@@ -1,7 +1,7 @@
-package com.project.mybatis.controller;
+package com.project.jdbc.controller;
 
-import com.project.mybatis.entity.User;
-import com.project.mybatis.mapper.UserMapper;
+import com.project.jdbc.entity.User;
+import com.project.jdbc.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +11,14 @@ import java.util.List;
  * @author Reisen
  */
 @RestController
-public class UserController {
+public class UserController_mybatis {
     @Autowired
     private UserMapper dao;
 
     /**
      * [{"id":1,"username":"Reisen","password":"1234qwer!!","createDate":"2020-05-24T01:46:41","modifyDate":"2020-05-24T01:46:46"}]
      * localDateTime 会显示一个T不符合观看习惯
-     * @see com.project.mybatis.config.LocalDateTimeConfig
+     * @see com.project.jdbc.config.LocalDateTimeConfig
      */
 
     @GetMapping(value = "findAll")
