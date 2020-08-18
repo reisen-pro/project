@@ -21,7 +21,9 @@ public class TypeAbstractExtends extends TypeAbstract {
     }
 
     public static void main(String[] args) {
+
         TypeAbstractExtends typeAbstractExtends = new TypeAbstractExtends();
+
         typeAbstractExtends.print();
         typeAbstractExtends.print("abc");
 

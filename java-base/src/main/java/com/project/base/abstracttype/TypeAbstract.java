@@ -10,10 +10,10 @@ public abstract class TypeAbstract {
     }
 
     public void print() {
-        System.out.println("父类打印" + "\"" + "\"");
+        System.out.println("父类print");
     }
 
     void print(String printStr) {
-        System.out.println("父类打印" + printStr);
+        System.out.println("父类print" + printStr);
     }
 }
