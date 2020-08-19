@@ -1,4 +1,4 @@
-package com.project.mall.dto;
+package com.project.mall.shop.dto;
 
 import lombok.Data;
 
@@ -13,8 +13,6 @@ import java.util.List;
  */
 @Data
 public class DetailImage {
-    String desc;
-    String anchor;
     String key;
     List detailImage;
 }
