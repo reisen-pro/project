@@ -16,6 +16,9 @@ public class ThreadDemo extends Thread {
         this.object = o;
     }
 
+    /**
+     * 重写run方法 每次减少1
+     */
     @Override
     public void run() {
         synchronized (object) {

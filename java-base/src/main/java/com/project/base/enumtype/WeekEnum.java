@@ -8,7 +8,13 @@ public enum WeekEnum {
     /**
      *  定义一周数字所代表的中文
      */
-    Monday("星期一", 1), Tuesday("星期二", 2), Wednesday("星期三", 3), Thursday("星期四", 4), Friday("星期五", 5), Saturday("星期六", 6), Sunday("星期天", 7);
+    Monday("星期一", 1),
+    Tuesday("星期二", 2),
+    Wednesday("星期三", 3),
+    Thursday("星期四", 4),
+    Friday("星期五", 5),
+    Saturday("星期六", 6),
+    Sunday("星期天", 7);
 
     private String weekDayC;
     private int weekDay;

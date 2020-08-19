@@ -13,6 +13,9 @@ public class RunnableDemo implements Runnable {
         this.object = o;
     }
 
+    /**
+     * 重写run方法 每次减少1
+     */
     @Override
     public void run() {
         while (true) {
