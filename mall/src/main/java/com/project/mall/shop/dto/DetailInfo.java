@@ -1,6 +1,8 @@
-package com.project.mall.dto;
+package com.project.mall.shop.dto;
 
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * @author Reisen
@@ -11,4 +13,7 @@ import lombok.Data;
  */
 @Data
 public class DetailInfo {
+    String desc;
+    String anchor;
+    List detailImage;
 }

@@ -1,4 +1,4 @@
-package com.project.mall.dto;
+package com.project.mall.shop.dto;
 
 import lombok.Data;
 
@@ -6,12 +6,12 @@ import java.lang.reflect.Array;
 
 /**
  * @author Reisen
- * @title: Columns
+ * @title: Tables
  * @projectName reisen
  * @description: TODO
- * @date 2020/8/16 15:25
+ * @date 2020/8/20 0:33
  */
 @Data
-public class Columns {
-    String[] columns;
+public class Tables {
+    String[] rules;
 }

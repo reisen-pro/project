@@ -1,4 +1,4 @@
-package com.project.mall.dto;
+package com.project.mall.shop.dto;
 
 import lombok.Data;
 
@@ -23,6 +23,7 @@ public class ItemInfo {
     List services;
     String desc;
     String discountBgColor;
-    DetailImage detailImage;
+    DetailInfo detailInfo;
     ShopInfo shopInfo;
+    ItemParams itemParams;
 }

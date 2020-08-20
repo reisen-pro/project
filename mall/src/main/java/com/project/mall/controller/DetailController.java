@@ -1,13 +1,12 @@
 package com.project.mall.controller;
 
-import com.project.mall.dto.*;
+import com.project.mall.shop.dto.*;
 import com.project.mall.vo.JsonResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Reisen
@@ -40,8 +39,11 @@ public class DetailController {
         itemInfo.setDesc("现特价上市");
         itemInfo.setDiscountBgColor("#ff8198");
 
+        DetailInfo detailInfo = new DetailInfo();
+        detailInfo.setDesc("优质现货，下单送运费险，店铺支持七天无理由退换货，现在收藏更有好礼相送~");
+        detailInfo.setAnchor("anchor");
+        List detailImageList = new ArrayList();
         DetailImage detailImage = new DetailImage();
-        detailImage.setDesc("新款上市~");
         ArrayList images = new ArrayList();
         images.add(image1);
         images.add(image2);
@@ -50,11 +52,12 @@ public class DetailController {
         images.add(image2);
         images.add(image3);
         detailImage.setDetailImage(images);
-        detailImage.setDesc("desc");
-        detailImage.setAnchor("anchor");
-        detailImage.setKey("key");
+        detailImage.setKey("穿着效果");
+        detailImageList.add(detailImage);
 
-        itemInfo.setDetailImage(detailImage);
+        detailInfo.setDetailImage(detailImageList);
+
+        itemInfo.setDetailInfo(detailInfo);
 
         String[] columns = {"销量 15800", "收藏333人", "默认快递"};
         itemInfo.setColumns(columns);
@@ -102,6 +105,48 @@ public class DetailController {
         servicesList.add(services4);
 
         itemInfo.setServices(servicesList);
+
+        ItemParams itemParams = new ItemParams();
+
+        Info info = new Info();
+        info.setAnchor("product_info");
+        info.setKey("产品参数");
+        HashMap map = new HashMap();
+        map.put("厂名","梦莎服饰有限公司");
+        map.put("尺码","S,X,L,M");
+        map.put("薄厚","普通");
+        map.put("季节","秋季");
+        map.put("材质","聚酯纤维");
+        map.put("袖长","长袖");
+        map.put("领型","其他领型");
+        info.setSet(map);
+
+        Rule rule = new Rule();
+        rule.setAnchor("size_info");
+        rule.setDisclaimer("以上尺寸为实物人工测量，因测量当时会有1-2cm偏差，相关数据仅供参考");
+        rule.setKey("尺码说明");
+        List sizeList = new ArrayList();
+        Tables tables1 = new Tables();
+        Tables tables2 = new Tables();
+        Tables tables3 = new Tables();
+        Tables tables4 = new Tables();
+        Tables tables5 = new Tables();
+        tables1.setRules(new String[]{"尺码","S","M","L","XL"});
+        tables2.setRules(new String[]{"袖长","61","62","63","64"});
+        tables3.setRules(new String[]{"裤长","96","97","98","99"});
+        tables4.setRules(new String[]{"肩长","36","37","38","39"});
+        tables5.setRules(new String[]{"衣长","54","55","56","X57"});
+        sizeList.add(tables1);
+        sizeList.add(tables2);
+        sizeList.add(tables3);
+        sizeList.add(tables4);
+        sizeList.add(tables5);
+        rule.setTables(sizeList);
+
+        itemParams.setInfo(info);
+        itemParams.setRule(rule
+        );
+        itemInfo.setItemParams(itemParams);
 
         JsonResult result = new JsonResult();
         result.setData(itemInfo);
