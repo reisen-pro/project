@@ -20,11 +20,15 @@ public class FtpUtil {
      *
      * @param path 路径
      * @param file 文件
-     * @return
      */
     private void upload(String path, File file) throws IOException {
         InputStream in = null;
 
+        // 主动模式（active mode）和被动模式（passive mode）
+        // ftp是tcp连接，所以要进行三次握手
+        // 主动模式的FTP是指服务器主动连接客户端的数据端口，被动模式的FTP是指服务器被动地等待客户端连接自己的数据端口。
+        // 主动FTP对FTP服务器的管理有利，但对客户端的管理不利。因为FTP服务器企图与客户端的高位随机端口建立连接，而这个端口很有可能被客户端的防火墙阻塞掉。
+        // 被动FTP对FTP客户端的管理有利，但对服务器端的管理不利。因为客户端要与服务器端建立两个连接，其中一个连到一个高位随机端口，而这个端口很有可能被服务器端的防火墙阻塞掉。
         // 设置PassiveMode传输
         ftpClient.enterLocalPassiveMode();
 
@@ -43,9 +47,11 @@ public class FtpUtil {
         if (!ftpClient.changeWorkingDirectory(path)) {
             ftpClient.makeDirectory(path);
         }
+
         // 跳转目标目录
         ftpClient.changeWorkingDirectory(path);
-        // 上传文件
+
+        // 上传
         in = new FileInputStream(file);
         String tempName = path + File.separator + file.getName();
         boolean flag = ftpClient.storeFile(new String(tempName.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1), in);
@@ -59,6 +65,7 @@ public class FtpUtil {
 
     /**
      * 下载
+     *
      * @param filePath 文件路径
      * @param fileName 文件名
      * @param downPath 保存路径
@@ -82,9 +89,9 @@ public class FtpUtil {
                     // ftp.deleteFile(new String(fileName.getBytes("UTF-8"),"ISO-8859-1"));
                     out.flush();
                     out.close();
-                    if(flag){
+                    if (flag) {
                         System.out.println("下载成功");
-                    }else{
+                    } else {
                         System.err.println("下载失败");
                     }
                 }
@@ -104,7 +111,8 @@ public class FtpUtil {
     /*密码*/
     private String password;
 
-    public FtpUtil() {}
+    public FtpUtil() {
+    }
 
     /**
      * 构造
@@ -162,7 +170,6 @@ public class FtpUtil {
             }
         }
     }
-
 
     public static void main(String[] args) throws IOException {
         FtpUtil ftpUtil = new FtpUtil("192.168.37.129", 21);
