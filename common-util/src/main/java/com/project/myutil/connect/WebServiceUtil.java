@@ -1,4 +1,4 @@
-package com.project.myutil.connectutils;
+package com.project.myutil.connect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.cxf.endpoint.Client;
@@ -6,9 +6,17 @@ import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 
 /**
  * 这个工具类基于cxf动态调用webservice接口。
+ *
+ * @author Reisen
  */
 @Slf4j
 public class WebServiceUtil {
+
+    /**
+     * 后缀
+     */
+    public static final String WSDL = "wsdl";
+
     /**
      * @param url           webservice地址
      * @param operationName 调用的方法名
@@ -16,8 +24,8 @@ public class WebServiceUtil {
      * @return object[]
      */
     public static Object[] invoke(String url, String operationName, Object reqDTO) {
-        if (url != null && !url.trim().endsWith("wsdl")) {
-            url = url + "?wsdl";
+        if (url != null && !url.trim().endsWith(WSDL)) {
+            url = url + "?" + WSDL;
         }
         JaxWsDynamicClientFactory dcf = JaxWsDynamicClientFactory.newInstance();
         Client client = dcf.createClient(url);

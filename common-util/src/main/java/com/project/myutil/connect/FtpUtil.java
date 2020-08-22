@@ -1,4 +1,4 @@
-package com.project.myutil.connectutils;
+package com.project.myutil.connect;
 
 import lombok.Data;
 import org.apache.commons.net.ftp.*;
@@ -9,10 +9,12 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * ftp封装工具类
+ *
+ * @author Reisen
  */
 
 @Data
-public class FTPUtil {
+public class FtpUtil {
 
 
     /**
@@ -102,16 +104,24 @@ public class FTPUtil {
     }
 
     FTPClient ftpClient = null;
-    /*地址*/
+    /**
+     * 地址
+     */
     private String host;
-    /*端口*/
+    /**
+     * 端口
+     */
     private Integer port;
-    /*用户名*/
+    /**
+     * 用户名
+     */
     private String username;
-    /*密码*/
+    /**
+     * 密码
+     */
     private String password;
 
-    public FTPUtil() {
+    public FtpUtil() {
     }
 
     /**
@@ -122,12 +132,12 @@ public class FTPUtil {
      */
 
     // 构造
-    private FTPUtil(String host, Integer port) {
+    private FtpUtil(String host, Integer port) {
         this.host = host;
         this.port = port;
     }
 
-    public FTPUtil(String host, Integer port, String username, String password) {
+    public FtpUtil(String host, Integer port, String username, String password) {
         this.host = host;
         this.port = port;
         this.username = username;
@@ -135,13 +145,19 @@ public class FTPUtil {
     }
 
 
-    // 连接
+    /**
+     * 连接
+      * @throws IOException
+     */
     private void connect() throws IOException {
         ftpClient = new FTPClient();
         ftpClient.connect(host, port);
     }
 
-    // 登陆
+    /**
+     * 登陆
+     * @throws IOException
+     */
     private void login() throws IOException {
         ftpClient.login(username, password);
         if (!FTPReply.isPositiveCompletion(ftpClient.getReplyCode())) {
@@ -152,7 +168,9 @@ public class FTPUtil {
         }
     }
 
-    // 关闭服务
+    /**
+     * 关闭服务
+     */
     private void close() {
         try {
             // 登出
@@ -172,8 +190,9 @@ public class FTPUtil {
     }
 
     public static void main(String[] args) throws IOException {
-        FTPUtil ftpUtil = new FTPUtil("192.168.37.129", 21);
-        ftpUtil.setUsername("ftpuser");
+        FtpUtil ftpUtil = new FtpUtil("192.168.37.129", 21);
+        String userName = "ftpuser";
+        ftpUtil.setUsername(userName);
         ftpUtil.setPassword("123456");
         ftpUtil.connect();
         ftpUtil.login();

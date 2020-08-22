@@ -1,10 +1,11 @@
-package com.project.myutil;
+package com.project.myutil.http;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * Json字符串操作工具类
+ * @author Reisen
  */
 public class JsonUtil {
 
