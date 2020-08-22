@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
  */
 
 @Data
-public class FtpUtil {
+public class FTPUtil {
 
 
     /**
@@ -111,7 +111,7 @@ public class FtpUtil {
     /*密码*/
     private String password;
 
-    public FtpUtil() {
+    public FTPUtil() {
     }
 
     /**
@@ -122,12 +122,12 @@ public class FtpUtil {
      */
 
     // 构造
-    private FtpUtil(String host, Integer port) {
+    private FTPUtil(String host, Integer port) {
         this.host = host;
         this.port = port;
     }
 
-    public FtpUtil(String host, Integer port, String username, String password) {
+    public FTPUtil(String host, Integer port, String username, String password) {
         this.host = host;
         this.port = port;
         this.username = username;
@@ -172,7 +172,7 @@ public class FtpUtil {
     }
 
     public static void main(String[] args) throws IOException {
-        FtpUtil ftpUtil = new FtpUtil("192.168.37.129", 21);
+        FTPUtil ftpUtil = new FTPUtil("192.168.37.129", 21);
         ftpUtil.setUsername("ftpuser");
         ftpUtil.setPassword("123456");
         ftpUtil.connect();
