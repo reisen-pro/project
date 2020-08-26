@@ -2,11 +2,12 @@ package com.project.demo.exercise;
 
 /**
  * 通过Thread.currentThread().getStackTrace()，得到相关信息。实际应用场景，在观察日志时，更加方便的定位。
+ *
  * @author Reisen
  */
 public class MethodAndClassNameGet {
 
-    static void doStaticVoid() {
+    private static void doStaticVoid() {
         System.out.println("文件名" + Thread.currentThread().getStackTrace()[1].getFileName());
         System.out.println("类名" + Thread.currentThread().getStackTrace()[1].getClassName());
         System.out.println("方法名" + Thread.currentThread().getStackTrace()[1].getMethodName());
@@ -21,6 +22,11 @@ public class MethodAndClassNameGet {
         System.out.println("方法名" + Thread.currentThread().getStackTrace()[1].getMethodName());
         // Thread.currentThread().getStackTrace()[1].getMethodName() 可以获得所在的行数
         System.out.println("所在行数" + Thread.currentThread().getStackTrace()[1].getLineNumber());
+    }
+
+    private void doExceptionTest() {
+        new NullPointerException().getStackTrace();
+        throw new NullPointerException();
     }
 
     public static void main(String[] args) {

@@ -4,6 +4,9 @@ import com.project.demo.webservice.WeatherInterface;
 
 import javax.jws.WebService;
 
+/**
+ * @author Reisen
+ */
 @WebService
 public class WeatherInterfaceImpl implements WeatherInterface {
     @Override

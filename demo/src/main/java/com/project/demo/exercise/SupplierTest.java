@@ -14,9 +14,7 @@ public class SupplierTest {
         int maxValue = getMax(() -> {
             int max = arr[0];
             for (int value : arr) {
-                if (max < value) {
-                    max = value;
-                }
+                max = Math.max(max, value);
             }
             return max;
         });
