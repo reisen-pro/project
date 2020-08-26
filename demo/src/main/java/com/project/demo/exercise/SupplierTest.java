@@ -1,12 +1,11 @@
 package com.project.demo.exercise;
 
-import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
- * Supplier
+ * Supplier java8函数式接口实现的一种快捷方式
  *
- * @author jidq_sinosoft
+ * @author Reisen
  * @see java.util.function.Supplier
  */
 public class SupplierTest {
