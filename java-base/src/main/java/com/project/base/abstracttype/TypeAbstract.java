@@ -13,7 +13,7 @@ public abstract class TypeAbstract {
         System.out.println("父类print");
     }
 
-    void print(String printStr) {
-        System.out.println("父类print" + printStr);
+    void print(String str) {
+        System.out.println("父类print" + str);
     }
 }

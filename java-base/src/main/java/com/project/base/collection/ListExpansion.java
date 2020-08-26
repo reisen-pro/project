@@ -4,15 +4,20 @@ import java.util.ArrayList;
 
 /**
  * 集合扩容时间测试
+ *
+ * @author Reisen
  */
-public class ListExpansion {
+public class ListExpansion<T> {
+
     public static void main(String[] args) {
         ArrayList<Object> list = new ArrayList<>();
         final int N = 10000000;
+
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < N; i++) {
             list.add(i);
         }
+
         long endTime = System.currentTimeMillis();
         System.out.println("使用ensureCapacity方法前：" + (endTime - startTime));
 
