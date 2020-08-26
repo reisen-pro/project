@@ -1,7 +1,8 @@
 package com.project.demo.exercise;
 
 /**
- * @author jidq_sinosoft
+ * 通过Thread.currentThread().getStackTrace()，得到相关信息。实际应用场景，在观察日志时，更加方便的定位。
+ * @author Reisen
  */
 public class MethodAndClassNameGet {
 
