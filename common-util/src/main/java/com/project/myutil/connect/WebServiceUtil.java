@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 
+import java.util.Timer;
+
 /**
  * 这个工具类基于cxf动态调用webservice接口。
  *
@@ -24,6 +26,8 @@ public class WebServiceUtil {
      * @return object[]
      */
     public static Object[] invoke(String url, String operationName, Object reqDTO) {
+
+
         if (url != null && !url.trim().endsWith(WSDL)) {
             url = url + "?" + WSDL;
         }
@@ -38,5 +42,9 @@ public class WebServiceUtil {
             log.info("调用过程中发生异常");
         }
         return objects;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(System.currentTimeMillis());
     }
 }

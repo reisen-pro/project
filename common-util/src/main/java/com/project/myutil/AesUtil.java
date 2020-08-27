@@ -15,15 +15,17 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
+
 /**
- * AES 是一种可逆加密算法，对用户的敏感信息加密处理 对原始数据进行AES加密后，在进行Base64编码转化；
+ * AES 是一种可逆加密算法，对用户的敏感信息加密处理 对原始数据进行AES加密后，在进行Base64编码转化
+ *
+ * @author Reisen BASE64Decoder BASE64Encoder 仅在jdk1.8中可以使用
  */
 public class AesUtil {
 
-    /*
+    /**
      * 加密用的Key 可以用26个字母和数字组成 此处使用AES-128-CBC加密模式，key需要为16位。
      */
-
     private static final String SKY = "abcdef0123456789";
     private static final String IVPARAMETER = "0123456789abcdef";
 
@@ -38,10 +40,14 @@ public class AesUtil {
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             byte[] raw = SKY.getBytes();
+            // 密码规格
             SecretKeySpec secretKeySpec = new SecretKeySpec(raw, "AES");
+            // 参数规格
             IvParameterSpec iv = new IvParameterSpec(IVPARAMETER.getBytes());
+            // 密码初始化
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
             byte[] bytes = cipher.doFinal(str.getBytes(StandardCharsets.UTF_8));
+            // 得到密码
             result = new BASE64Encoder().encode(bytes);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException | IllegalBlockSizeException | InvalidKeyException | BadPaddingException e) {
             e.printStackTrace();
@@ -73,10 +79,9 @@ public class AesUtil {
         return originalString;
     }
 
-
+    // 简单测试
     public static void main(String[] args) {
         System.out.println(AesUtil.encrypt("1234567891123456"));
         System.out.println(AesUtil.decrypt("NwruFWQ7zBgQrjFz9c0sHFW+tveQy3afYV1g2Tr2Y70="));
-
     }
 }
