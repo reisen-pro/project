@@ -148,7 +148,7 @@ public class DateUtil {
      * @param format format
      * @return String
      */
-    public static String afterFormat(Class<?> c, String format) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public static String afterFormat(Class<? extends Temporal> c, String format) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Object o = c.getMethod("now").invoke(null);
         return (String) o.getClass().getMethod("format", DateTimeFormatter.class).invoke(o, DateTimeFormatter.ofPattern(format));
     }
@@ -172,7 +172,7 @@ public class DateUtil {
         int testCount = 1000000;
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < testCount; i++) {
-            afterFormat(LocalDate.class, "yyyy-MM-dd");
+            afterFormat(LocalDateTime.class, "yyyy-MM-dd");
         }
         System.out.println("反射调用耗时:" + (System.currentTimeMillis() - startTime));
 
