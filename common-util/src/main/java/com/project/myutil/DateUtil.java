@@ -152,4 +152,35 @@ public class DateUtil {
         Object o = c.getMethod("now").invoke(null);
         return (String) o.getClass().getMethod("format", DateTimeFormatter.class).invoke(o, DateTimeFormatter.ofPattern(format));
     }
+
+    /**
+     * 测试性能 反射创建对象
+     * 上述代码在调用 Object o = now() 时耗时较多，当时就考虑，创建一个静态全局变量 static Object obj
+     * if(obj == null) {
+     * //obj反射调用now();
+     * }
+     * 一测试确实，节省了很多时间，但是问题来了，如果这样处理，那么调用的多次afterformat方法，循环测试调用在多次，都是同一个时间，导致数据不准确。
+     * 实为舍本逐末，放弃这条。
+     * 如果真的有这种场景，我目前的思路是使用防抖的思想去提高性能，减少耗时。
+     *
+     * @param args args
+     * @throws NoSuchMethodException     exception
+     * @throws IllegalAccessException    exception
+     * @throws InvocationTargetException exception
+     */
+    public static void main(String[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        int testCount = 1000000;
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < testCount; i++) {
+            afterFormat(LocalDate.class, "yyyy-MM-dd");
+        }
+        System.out.println("反射调用耗时:" + (System.currentTimeMillis() - startTime));
+
+        long startTime2 = System.currentTimeMillis();
+        for (int i = 0; i < testCount; i++) {
+            afterFormat(LocalDate.now(), "yyyy-MM-dd");
+        }
+        System.out.println("匹配类型调用耗时:" + (System.currentTimeMillis() - startTime2));
+    }
+
 }
