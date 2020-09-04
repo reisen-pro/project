@@ -1,6 +1,7 @@
 package com.project.myutil;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
@@ -149,7 +150,10 @@ public class DateUtil {
      * @return String
      */
     public static String afterFormat(Class<? extends Temporal> c, String format) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Object o = c.getMethod("now").invoke(null);
+        Method method = c.getMethod("now");
+        method.setAccessible(true);
+        method.isAccessible();
+        Object o = method.invoke(null);
         return (String) o.getClass().getMethod("format", DateTimeFormatter.class).invoke(o, DateTimeFormatter.ofPattern(format));
     }
 
