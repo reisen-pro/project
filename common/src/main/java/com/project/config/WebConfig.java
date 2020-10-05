@@ -14,6 +14,10 @@ import java.util.List;
 
 /**
  * Web相关的配置信息
+ * 如果配置了这个类还是无效，可以试一下下面这个注解
+ * 对于实际处理的controller类上可以加上这个注解
+ *
+ * @CrossOrigin(value = "*")
  */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -72,7 +76,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry corsRegistry) {
         //具体的跨域策略配置
-        corsRegistry.addMapping("/**").allowedMethods("*").allowedOrigins("*").allowedHeaders("*").allowCredentials(true);
+        corsRegistry.addMapping("/**").allowedMethods("*").allowedOrigins("*").allowedHeaders("*").allowCredentials(true).allowedHeaders("*").maxAge(3600);
     }
 
     @Override
