@@ -6,7 +6,8 @@ import java.lang.ref.SoftReference;
  * @author Reisen
  * @title: SoftReference
  * @projectName reisen
- * @description: 软引用 软引用非常适合缓存使用  设置堆大小20兆 -Xmx20M  经过测试 这种引用jdk8会oom jdk11中 软引用m会回收掉空间。以供b数组创建
+ * @description: 软引用 软引用非常适合缓存使用  设置堆大小20兆 -Xmx20M
+ * 经过测试 这种引用jdk8会oom jdk11中 软引用m会回收掉空间。以供b数组创建
  * @date 2020/10/5 23:25
  */
 public class SoftReferenceDemo {

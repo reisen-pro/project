@@ -76,7 +76,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry corsRegistry) {
         //具体的跨域策略配置
-        corsRegistry.addMapping("/**").allowedMethods("*").allowedOrigins("*").allowedHeaders("*").allowCredentials(true).allowedHeaders("*").maxAge(3600);
+        corsRegistry.addMapping("/**").allowedMethods("*").allowedOrigins("*").allowedHeaders("*").allowCredentials(true);
     }
 
     @Override
