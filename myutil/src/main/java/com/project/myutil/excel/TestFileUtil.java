@@ -3,6 +3,9 @@ package com.project.myutil.excel;
 import java.io.File;
 import java.io.InputStream;
 
+/**
+ * @author reisen
+ */
 public class TestFileUtil {
     public static InputStream getResourcesFileInputStream(String fileName) {
         return Thread.currentThread().getContextClassLoader().getResourceAsStream("" + fileName);
