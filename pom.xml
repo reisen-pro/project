@@ -5,14 +5,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>java-base</module>
-
-        <module>common-util</module>
+        <module>util</module>
         <module>common</module>
-
         <module>jdbc</module>
-
         <module>demo</module>
-        <module>email</module>
         <module>mall</module>
 
 
