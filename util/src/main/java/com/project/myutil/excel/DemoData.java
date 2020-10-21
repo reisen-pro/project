@@ -6,6 +6,9 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * @author reisen
+ */
 @Data
 public class DemoData {
     @ExcelProperty("字符串标题")

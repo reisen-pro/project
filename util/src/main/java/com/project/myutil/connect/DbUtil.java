@@ -121,7 +121,7 @@ public class DbUtil {
     /**
      * 释放结果集
      *
-     * @param rs 结果集
+     * @param resultSet 结果集
      */
     public static void closeResultSet(ResultSet resultSet) {
         if (resultSet != null) {

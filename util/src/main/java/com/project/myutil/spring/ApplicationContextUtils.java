@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
  * Spring容器工具类，工具类实现了Spring容器的感知器对象
  * 在项目中有些地方，例如：执行扩展JpaRepository方法实现以及SpringSecurity配置中数据源的获取
  * 无法通过自动注入完成，此时在可以通过感知器对象完成
+ * @author reisen
  */
 @Component
 public class ApplicationContextUtils implements ApplicationContextAware {

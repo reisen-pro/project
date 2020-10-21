@@ -40,8 +40,6 @@
             <artifactId>cxf-rt-transports-http</artifactId>
         </dependency>
 
-
-
         <!-- 日志 -->
         <dependency>
             <groupId>org.slf4j</groupId>
