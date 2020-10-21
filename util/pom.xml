@@ -8,9 +8,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.project</groupId>
-    <artifactId>common-util</artifactId>
+    <artifactId>util</artifactId>
     <version>${project.version}</version>
-    <name>common-util</name>
+    <name>util</name>
 
     <dependencies>
         <dependency>

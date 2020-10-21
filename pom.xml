@@ -4,14 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>java-base</module>
+        <module>base</module>
         <module>util</module>
         <module>common</module>
         <module>jdbc</module>
         <module>demo</module>
         <module>mall</module>
-
-
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
