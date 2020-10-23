@@ -1,4 +1,4 @@
-package com.project.myutil;
+package com.project.util;
 
 import java.io.FileInputStream;
 import java.util.Properties;
@@ -9,9 +9,10 @@ import java.util.Properties;
  * @author Reisen
  */
 public class PropertiesUtil {
-    private PropertiesUtil() {
-
-    }
+    /**
+     * 私有构造
+     */
+    private PropertiesUtil() {}
 
     public static Properties loadProperties(String filePath) {
         //Properties继承自Hashtable，所以其中的结构就是K-V对结构

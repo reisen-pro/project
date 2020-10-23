@@ -1,4 +1,4 @@
-package com.project.myutil.connect;
+package com.project.util.connect;
 
 import com.jcraft.jsch.*;
 import lombok.extern.slf4j.Slf4j;

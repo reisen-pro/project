@@ -1,4 +1,4 @@
-package com.project.myutil;
+package com.project.util;
 
 import lombok.Data;
 

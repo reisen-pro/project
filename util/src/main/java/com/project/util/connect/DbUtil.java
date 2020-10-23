@@ -1,4 +1,4 @@
-package com.project.myutil.connect;
+package com.project.util.connect;
 
 import lombok.Data;
 
@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import com.project.myutil.PropertiesUtil;
+import com.project.util.PropertiesUtil;
 
 /**
  * 数据库操作工具类：封装连接的获取以及资源的释放等通用操作

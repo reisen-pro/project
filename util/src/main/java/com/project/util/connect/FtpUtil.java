@@ -1,4 +1,4 @@
-package com.project.myutil.connect;
+package com.project.util.connect;
 
 import lombok.Data;
 import org.apache.commons.net.ftp.*;

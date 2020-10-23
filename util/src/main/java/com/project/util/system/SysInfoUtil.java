@@ -1,4 +1,4 @@
-package com.project.myutil.system;
+package com.project.util.system;
 
 import com.sun.management.OperatingSystemMXBean;
 

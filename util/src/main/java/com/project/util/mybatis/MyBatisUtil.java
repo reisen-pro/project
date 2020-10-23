@@ -1,4 +1,4 @@
-package com.project.myutil.mybatis;
+package com.project.util.mybatis;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;

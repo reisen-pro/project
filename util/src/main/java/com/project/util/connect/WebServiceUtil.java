@@ -1,10 +1,8 @@
-package com.project.myutil.connect;
+package com.project.util.connect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
-
-import java.util.Timer;
 
 /**
  * 这个工具类基于cxf动态调用webservice接口。

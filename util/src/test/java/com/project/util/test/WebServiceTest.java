@@ -1,7 +1,7 @@
 package com.project.util.test;
 
 
-import com.project.myutil.connect.WebServiceUtil;
+import com.project.util.connect.WebServiceUtil;
 import org.junit.Test;
 
 public class WebServiceTest {

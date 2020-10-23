@@ -1,4 +1,4 @@
-package com.project.myutil;
+package com.project.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
