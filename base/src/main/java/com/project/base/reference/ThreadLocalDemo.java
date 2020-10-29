@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
  * @author Reisen
  * @title: ThreadLocalDemo
  * @projectName project
- * @description: TODO
+ * @description: 可以看到ThreadLocal的源码  它的静态内部类 ThreadLocalMap threadLocals 作为容器存放
  * @date 2020/10/27 23:31
  */
 public class ThreadLocalDemo {
@@ -19,6 +19,7 @@ public class ThreadLocalDemo {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            // 这里是null
             System.out.println(t1.get());
         }).start();
 

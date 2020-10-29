@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 在xml中配置user对象 -->
+
+    <!-- 1.直接实例新对象-->
+    <bean id="user" class="com.project.spring.beans.entity.User"></bean>
+
+    <!-- 2.实例新对象，并且根据对象的构造方法，进行赋值-->
+    <bean id="userAss" class="com.project.spring.beans.entity.User">
+        <!-- 设定对象中的参数位置 参数名 参数类型 参数值 -->
+        <constructor-arg index="0" name="id" type="java.lang.String" value="1"></constructor-arg>
+        <constructor-arg index="1" name="userName" type="java.lang.String" value="reisen"></constructor-arg>
+    </bean>
+
+    <!-- 3.实例新对象，并且根据对象的构造方法，进行赋值,并且其中引用了一个对象-->
+    <bean id="userAssRef" class="com.project.spring.beans.entity.User">
+        <constructor-arg index="0" name="id" type="java.lang.String" value="1"></constructor-arg>
+        <!--使用ref来引用对象 -->
+        <constructor-arg index="1" name="userName" type="java.lang.String" ref="person"></constructor-arg>
+    </bean>
+
+    <!-- 4.使用工厂来创建对象-->
+    <bean id="userStaticFactory" class="com.project.spring.beans.entity.User" factory-bean="factory" factory-method="getBean"></bean>
+
+    <!-- 一个person的String对象 -->
+    <bean id="person" class="java.lang.String">
+        <constructor-arg index="0" name="value" value="person"></constructor-arg>
+    </bean>
+
+    <bean id="factory" class="com.project.spring.beans.entity.Factory"></bean>
+
+</beans>

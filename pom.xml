@@ -10,6 +10,7 @@
         <module>jdbc</module>
         <module>demo</module>
         <module>mall</module>
+        <module>spring</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
