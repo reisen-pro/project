@@ -1,34 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
     <!-- 在xml中配置user对象 -->
 
-    <!-- 1.直接实例新对象-->
-    <bean id="user" class="com.project.spring.beans.entity.User"></bean>
+    <!-- 1.直接实例新对象
+    scope用于指定创建的对象是单例还是多例且影响bean被创建的时间
+    指定初始化方法和销毁方法 init-method="init" destroy-method="destory"
+    lazy-init懒加载启用 初始化的时候不会被创建，只有被使用时才会被创建
+    -->
+    <bean id="user" class="com.project.spring.beans.entity.User" scope="prototype" init-method="init"
+          destroy-method="destory" lazy-init="true"></bean>
 
     <!-- 2.实例新对象，并且根据对象的构造方法，进行赋值-->
-    <bean id="userAss" class="com.project.spring.beans.entity.User">
+    <bean id="userConstruction" class="com.project.spring.beans.entity.User">
         <!-- 设定对象中的参数位置 参数名 参数类型 参数值 -->
         <constructor-arg index="0" name="id" type="java.lang.String" value="1"></constructor-arg>
         <constructor-arg index="1" name="userName" type="java.lang.String" value="reisen"></constructor-arg>
     </bean>
 
     <!-- 3.实例新对象，并且根据对象的构造方法，进行赋值,并且其中引用了一个对象-->
-    <bean id="userAssRef" class="com.project.spring.beans.entity.User">
+    <bean id="userRef" class="com.project.spring.beans.entity.User">
         <constructor-arg index="0" name="id" type="java.lang.String" value="1"></constructor-arg>
         <!--使用ref来引用对象 -->
         <constructor-arg index="1" name="userName" type="java.lang.String" ref="person"></constructor-arg>
     </bean>
 
     <!-- 4.使用工厂来创建对象-->
-    <bean id="userStaticFactory" class="com.project.spring.beans.entity.User" factory-bean="factory" factory-method="getBean"></bean>
+    <bean id="userStaticFactory" class="com.project.spring.beans.entity.User" factory-bean="factory"
+          factory-method="getBean"></bean>
 
-    <!-- 一个person的String对象 -->
+    <!-- 5.使用c命名空间 它不能装配集合-->
+    <bean id="userC" class="com.project.spring.beans.entity.User" c:_0="c" c:_1="cCreate">
+    </bean>
+
+    <bean name="userService" class="com.project.spring.beans.service.UserService">
+        <constructor-arg>
+            <list>
+                <ref bean="user"></ref>
+                <ref bean="userConstruction"></ref>
+                <ref bean="userRef"></ref>
+                <ref bean="userC"></ref>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- 定义一个String的bean person -->
     <bean id="person" class="java.lang.String">
         <constructor-arg index="0" name="value" value="person"></constructor-arg>
     </bean>
-
+    <!-- 定义factory 的bean -->
     <bean id="factory" class="com.project.spring.beans.entity.Factory"></bean>
 
 </beans>

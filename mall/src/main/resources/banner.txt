@@ -1,0 +1,2 @@
+${AnsiColor.BRIGHT_YELLOW}
+自定义springboot banner
