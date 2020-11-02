@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userDao" class="com.project.spring.beans.dao.UserDaoDi" scope="prototype"></bean>
+
+    <bean id="userService" class="com.project.spring.beans.service.UserServiceDi">
+        <constructor-arg index="0" name="userDao" type="com.project.spring.beans.dao.UserDaoDi" ref="userDao"></constructor-arg>
+    </bean>
+
+    <bean id="userServiceSet" class="com.project.spring.beans.service.UserServiceDi">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+
+    <!-- autowire 使用自动装配 根据名字  autowire="byName" -->
+    <!-- autowire 使用类型装配 根据类型 autowire="byType" -->
+    <!-- 如果使用了根据类型来自动装配，那么ioc容器中智能有一个这样的类型，否则就会报错！ -->
+    <bean id="userServiceAuto" class="com.project.spring.beans.service.UserServiceDi" autowire="byName"/>
+</beans>
