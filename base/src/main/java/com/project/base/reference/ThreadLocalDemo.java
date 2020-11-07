@@ -30,6 +30,8 @@ public class ThreadLocalDemo {
                 e.printStackTrace();
             }
             t1.set(new Person());
+            // 防止内存泄漏，不用的时候需要remove掉
+            t1.remove();
         }).start();
     }
 }
