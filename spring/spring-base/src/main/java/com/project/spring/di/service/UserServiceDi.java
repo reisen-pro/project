@@ -1,6 +1,6 @@
-package com.project.spring.beans.service;
+package com.project.spring.di.service;
 
-import com.project.spring.beans.dao.UserDaoDi;
+import com.project.spring.di.dao.UserDaoDi;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

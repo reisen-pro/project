@@ -1,4 +1,4 @@
-package com.project.spring.beans.dao;
+package com.project.spring.di.dao;
 
 public class UserDaoDi {
     public void save() {

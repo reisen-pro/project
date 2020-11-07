@@ -1,6 +1,6 @@
-package com.project.spring.beans;
+package com.project.spring.di;
 
-import com.project.spring.beans.service.UserServiceDi;
+import com.project.spring.di.service.UserServiceDi;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
