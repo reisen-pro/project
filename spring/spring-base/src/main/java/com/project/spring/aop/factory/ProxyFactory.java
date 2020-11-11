@@ -1,41 +1,48 @@
 package com.project.spring.aop.factory;
 
-import org.springframework.cglib.proxy.Enhancer;
-import org.springframework.cglib.proxy.MethodInterceptor;
-import org.springframework.cglib.proxy.MethodProxy;
+import org.springframework.cglib.proxy.*;
 
 import java.lang.reflect.Method;
 
 /**
  * 使用cglib就是为了弥补动态代理的不足【动态代理的目标对象一定要实现接口】
  */
-public class ProxyFactory implements MethodInterceptor {
+public class ProxyFactory {
 
     // 维护目标对象
-    private static final Object target;
+    private static Object target;
 
+    // 维护关键点代码的类
     private static AOP aop;
 
-    public ProxyFactory(Object target) {
-        this.target = target;
-    }
+    /**
+     * @param target_ 需要增强的类
+     * @param aop_    增强方法抽取出来的泛用类AOP
+     * @return obj
+     */
+    public static Object getProxyInstance(Object target_, AOP aop_) {
+        // 目标对象和关键点代码的类都是通过外界传递过来
+        target = target_;
+        aop = aop_;
 
-    // 给目标对象创建代理对象
-    public Object getProxyInstance() {
-        // 1.工具类
-        Enhancer en = new Enhancer();
-        // 2.设置父类
-        en.setSuperclass(target.getClass());
-        // 3.设置回调函数
-        en.setCallback(this);
-        return en.create();
-    }
-
-    @Override
-    public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-        System.out.println("开始事务");
-        Object returnValue = method.invoke(target, objects);
-        System.out.println("提交事务...");
-        return returnValue;
+        // 新的代理实例，在被增强类调用方法时，使用aop类进行增强方法
+        return Proxy.newProxyInstance(
+                // 被增强类的类加载器
+                target.getClass().getClassLoader(),
+                // 这个对象所实现的接口
+                target.getClass().getInterfaces(),
+                new InvocationHandler() {
+                    // 对方法进行增强
+                    @Override
+                    public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
+                        aop.begin();
+                        // 放射进行执行
+                        Object returnValue = method.invoke(target, objects);
+                        aop.close();
+                        // 返回值
+                        return returnValue;
+                    }
+                }
+        );
     }
 }
