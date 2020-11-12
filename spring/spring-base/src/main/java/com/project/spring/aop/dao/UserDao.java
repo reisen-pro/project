@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDao implements IUser {
     // do save
+    @Override
     public void save() {
         System.out.println("userDao do save");
     }

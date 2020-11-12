@@ -17,10 +17,20 @@ public class App {
     }
 
     @Test
-    public void test() {
+    public void testAopXmlConfig() {
         ApplicationContext ac = new ClassPathXmlApplicationContext("application-aop.xml");
         IUser iUser = (IUser) ac.getBean("proxy");
         System.out.println(iUser.getClass());
+        iUser.save();
+    }
+
+    @Test
+    public void testAspectj() {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("application-aopConfig.xml");
+        IUser iUser = (IUser) ac.getBean("userDao");
+
+        System.out.println(iUser.getClass());
+
         iUser.save();
     }
 }
