@@ -1,8 +1,10 @@
 package com.project.spring.aop;
 
+import com.project.spring.aop.dao.OrderDao;
 import com.project.spring.aop.dao.UserDao;
 import com.project.spring.aop.entity.IUser;
 import com.project.spring.aop.factory.ProxyFactoryConstruction;
+import org.aspectj.weaver.ast.Or;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -28,9 +30,12 @@ public class App {
     public void testAspectj() {
         ApplicationContext ac = new ClassPathXmlApplicationContext("application-aopConfig.xml");
         IUser iUser = (IUser) ac.getBean("userDao");
-
+        OrderDao orderDao = (OrderDao) ac.getBean("orderDao");
+        // jdk代理
         System.out.println(iUser.getClass());
-
+        // cglib动态代理
+        System.out.println(orderDao.getClass());
         iUser.save();
+        orderDao.save();
     }
 }
