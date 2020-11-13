@@ -1,8 +1,7 @@
 package com.project.spring.aop.factory;
 
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,13 +17,36 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class AOP {
-    @Before("execution(* com.project.spring.aop..*(..))")
+
+    @Pointcut("execution(* com.project.spring.aop..*(..))")
+    public void pointCut_(){};
+
+    @Before("pointCut_()")
     public void begin() {
         System.out.println("开始事务");
     }
 
-    @After("execution(* com.project.spring.aop..*(..))")
+    @After("pointCut_()")
     public void close() {
         System.out.println("关闭事务");
+    }
+
+    // 返回后通知：在调用目标方法结束后执行【出现异常不执行】
+    @AfterReturning("pointCut_()")
+    public void afterReturning() {
+        System.out.println("afterReturning");
+    }
+
+    // 异常通知：当目标方法执行异常时执行此关注点代码
+    @AfterThrowing("pointCut_()")
+    public void afterThrowing() {
+        System.out.println("afterThrowing");
+    }
+
+    @Around("pointCut_()")
+    public void around(ProceedingJoinPoint point) throws Throwable {
+        System.out.println("环绕前");
+        point.proceed();
+        System.out.println("环绕后");
     }
 }

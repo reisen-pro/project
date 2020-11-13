@@ -4,7 +4,6 @@ import com.project.spring.aop.dao.OrderDao;
 import com.project.spring.aop.dao.UserDao;
 import com.project.spring.aop.entity.IUser;
 import com.project.spring.aop.factory.ProxyFactoryConstruction;
-import org.aspectj.weaver.ast.Or;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -35,7 +34,7 @@ public class App {
         System.out.println(iUser.getClass());
         // cglib动态代理
         System.out.println(orderDao.getClass());
-        iUser.save();
+        //iUser.save();
         orderDao.save();
     }
 }

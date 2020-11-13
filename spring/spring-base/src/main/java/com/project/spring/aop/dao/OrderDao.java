@@ -17,5 +17,6 @@ import java.util.UUID;
 public class OrderDao {
     public void save() {
         log.info("新订单入库,订单号:{},下单时间:{}", UUID.randomUUID(), LocalDateTime.now());
+        //throw new NullPointerException();
     }
 }
