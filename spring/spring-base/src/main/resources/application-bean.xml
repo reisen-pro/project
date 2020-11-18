@@ -11,6 +11,8 @@
     scope用于指定创建的对象是单例还是多例且影响bean被创建的时间
     指定初始化方法和销毁方法 init-method="init" destroy-method="destory"
     lazy-init懒加载启用 初始化的时候不会被创建，只有被使用时才会被创建
+
+
     -->
     <bean id="user" class="com.project.spring.beans.entity.User" scope="prototype" init-method="init"
           destroy-method="destory" lazy-init="true"></bean>
@@ -20,6 +22,8 @@
         <!-- 设定对象中的参数位置 参数名 参数类型 参数值 -->
         <constructor-arg index="0" name="id" type="java.lang.String" value="1"></constructor-arg>
         <constructor-arg index="1" name="userName" type="java.lang.String" value="reisen"></constructor-arg>
+        <!-- 配置的bean是单例的，而bean里面的对象我们希望是多例的话。 使用lookup方法注入 -->
+        <!-- <lookup-method name="getId" bean="person"></lookup-method> -->
     </bean>
 
     <!-- 3.实例新对象，并且根据对象的构造方法，进行赋值,并且其中引用了一个对象-->

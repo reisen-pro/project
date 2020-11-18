@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 注册控制器 name属性的值表示的是请求的路径【也就是说，当用户请求到/helloAction时，就交由HelloAction类进行处理】 -->
+    <bean class="com.project.spring.mvc.action.HelloAction" name="/hello.action"></bean>
+</beans>

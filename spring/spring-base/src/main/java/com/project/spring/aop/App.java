@@ -37,4 +37,12 @@ public class App {
         //iUser.save();
         orderDao.save();
     }
+
+    // -noverify
+    @Test
+    public void testAopXml() {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("application-aopXml.xml");
+        IUser iUser = (IUser) ac.getBean("userDaoXml");
+        iUser.save();
+    }
 }

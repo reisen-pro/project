@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 对象实例 -->
+    <bean id="userDaoXml" class="com.project.spring.aop.dao.UserDaoXml"></bean>
+    <bean id="orderDaoXml" class="com.project.spring.aop.dao.OrderDaoXml"></bean>
+
+    <!-- 切面类 -->
+    <bean id="aopXml" class="com.project.spring.aop.factory.AOPXml"></bean>
+
+    <!-- aop配置 -->
+    <aop:config>
+        <!-- 切入表达式 -->
+        <aop:pointcut id="pointCut" expression="execution(* com.project.spring.aop..*(..))"/>
+
+        <!-- 指定切面类是哪个 -->
+        <aop:aspect ref="aopXml">
+            <!-- 指定用来拦截的时候执行切面类的哪些方法 -->
+            <aop:before method="begin" pointcut-ref="pointCut"></aop:before>
+            <aop:after method="close" pointcut-ref="pointCut"></aop:after>
+        </aop:aspect>
+    </aop:config>
+</beans>
