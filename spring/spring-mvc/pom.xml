@@ -67,28 +67,27 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <!-- 报错信息:Invalid byte tag in constant pool: 19 设置作用域为 provided -->
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
-
     <build>
-        <pluginManagement>
-            <plugins>
-                <!-- 配置Tomcat插件 -->
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat-maven-plugin</artifactId>
-                    <version>2.2</version>
-                    <configuration>
-                        <port>8000</port>
-                        <path>/</path>
-                        <uriEncoding>UTF-8</uriEncoding>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+        <plugins>
+            <!-- 配置Tomcat插件 这个mvc模块不要从这里启动,从外部配置tomcat启动 -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>8000</port>
+                    <path>/</path>
+                    <uriEncoding>UTF-8</uriEncoding>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>

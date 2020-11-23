@@ -3,5 +3,41 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!-- 注册控制器 name属性的值表示的是请求的路径【也就是说，当用户请求到/helloAction时，就交由HelloAction类进行处理】 -->
+    <!--
     <bean class="com.project.spring.mvc.action.HelloAction" name="/hello.action"></bean>
+    -->
+
+    <bean class="com.project.spring.mvc.action.HelloAction" id="helloAction"></bean>
+    <bean class="com.project.spring.mvc.action.BytAction" id="bytAction"></bean>
+    <bean class="com.project.spring.mvc.action.OkAction" id="okAction"></bean>
+
+    <!-- 配置视图解析器  InternalResourceViewResolver -->
+    <!--
+    如果Action中写的是视图逻辑名称，那么视图解析器就必须配置
+    如果Action中写的是视图真实名称，那么视图解析器就可选配置
+    -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 路径前缀 -->
+        <property name="prefix" value="/"/>
+        <!-- 路径后缀 -->
+        <property name="suffix" value=".jsp"/>
+        <!-- 前缀+视图逻辑名+后缀=真实路径 -->
+    </bean>
+
+    <!-- 专用于jsp到jsp/html的转发控制器 -->
+    <bean name="/ok.action" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+        <!-- 转发到真实视图名 -->
+        <property name="viewName" value="/webapp/ok.jsp"></property>
+    </bean>
+
+    <!-- 注册映射器（handler包）（框架）【可省略】 -->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/hello.action">helloAction</prop>
+                <prop key="/bye.action">bytAction</prop>
+                <prop key="/ok.action">okAction</prop>
+            </props>
+        </property>
+    </bean>
 </beans>
