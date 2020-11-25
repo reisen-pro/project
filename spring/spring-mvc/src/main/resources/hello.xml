@@ -8,8 +8,9 @@
     -->
 
     <bean class="com.project.spring.mvc.action.HelloAction" id="helloAction"></bean>
-    <bean class="com.project.spring.mvc.action.BytAction" id="bytAction"></bean>
+    <bean class="com.project.spring.mvc.action.ByeAction" id="bytAction"></bean>
     <bean class="com.project.spring.mvc.action.OkAction" id="okAction"></bean>
+    <bean class="com.project.spring.mvc.action.HelloController" id="helloController"></bean>
 
     <!-- 配置视图解析器  InternalResourceViewResolver -->
     <!--
@@ -34,6 +35,7 @@
     <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <props>
+                <prop key="/hello.controller">helloController</prop>
                 <prop key="/hello.action">helloAction</prop>
                 <prop key="/bye.action">bytAction</prop>
                 <prop key="/ok.action">okAction</prop>
