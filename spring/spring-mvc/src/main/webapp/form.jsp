@@ -11,7 +11,7 @@
     <title>form</title>
 </head>
 <body>
-<form action="<%=request.getContextPath()%>/hello.controller" method="post">
+<form action="<%=request.getContextPath()%>/demo/user.action" method="post">
     <table align="center">
         <tr>
             <td>用户名：</td>
@@ -20,6 +20,10 @@
         <tr>
             <td>编码</td>
             <td><input type="text" name="id"></td>
+        </tr>
+        <tr>
+            <td>编码</td>
+            <td><input type="text" name="date" value="1996-05-24"></td>
         </tr>
         <tr>
             <td>
