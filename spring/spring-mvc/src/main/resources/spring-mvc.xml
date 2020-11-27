@@ -7,4 +7,51 @@
     <!-- 开启注解扫描器 -->
     <context:component-scan base-package="com.project.spring.mvc"></context:component-scan>
 
+
+    <!-- 注册属性编辑器 -->
+    <bean id="customPropertyEditor" class="com.project.spring.mvc.registrar.CustomPropertyEditor">
+    </bean>
+
+    <!-- 自定义webBinder -->
+    <bean id="customBinderOne" class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+        <!-- propertyEditorRegistrars用于属性编辑器 -->
+        <!--
+        <property name="propertyEditorRegistrars">
+            <list>
+                <ref bean="customPropertyEditor"></ref>
+            </list>
+        </property>
+        -->
+    </bean>
+
+
+    <!-- 注解适配器 -->
+    <!--
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="webBindingInitializer" ref="customBinderOne"></property>
+    </bean>
+    -->
+
+
+    <!-- 转换器 -->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="com.project.spring.mvc.registrar.CustomDateConverter"></bean>
+                <bean class="com.project.spring.mvc.registrar.StringTrimConverter"></bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 自定义webBinder -->
+    <bean id="customBinderTwo" class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+        <!-- 使用converter进行参数转换 -->
+        <property name="conversionService" ref="conversionService"></property>
+    </bean>
+
+    <!-- 注解适配器 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <!-- 在webBindingInitializer中注入自定义编辑器、自定义转换器 -->
+        <property name="webBindingInitializer" ref="customBinderTwo"></property>
+    </bean>
 </beans>

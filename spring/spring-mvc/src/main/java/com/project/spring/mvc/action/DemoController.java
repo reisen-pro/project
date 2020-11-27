@@ -15,7 +15,7 @@ import java.util.Date;
 @RequestMapping(value = "/demo")
 public class DemoController {
 
-    /* 表明重写InitBinder方法 */
+    /* 表明重写InitBinder方法 如果注册了全局的时间转换，再访问到这个单独的controller时，由于就近原则，这个会作用，全局的不会 */
     @InitBinder
     protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
         binder.registerCustomEditor(
