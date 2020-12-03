@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app>
+<web-app xmlns:mvc="http://www.springframework.org/schema/mvc">
     <!-- 注册springmvc框架核心控制器 -->
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>
@@ -19,6 +19,11 @@
         <servlet-name>DispatcherServlet</servlet-name>
         <!-- 这里指定了后缀格式 -->
         <url-pattern>*.controller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DispatcherServlet</servlet-name>
+        <!-- rest方式配置 -->
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <!-- 编码过滤器 -->
     <filter>
