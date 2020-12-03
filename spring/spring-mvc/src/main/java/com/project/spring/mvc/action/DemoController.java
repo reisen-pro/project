@@ -28,13 +28,13 @@ public class DemoController {
     public String hello(Model model) {
         System.out.println("HelloAction::hello()");
         model.addAttribute("message", "hello!");
-        return "/index.jsp";
+        return "/hello.jsp";
     }
 
     @RequestMapping(value = "/bye.action", method = RequestMethod.POST)
     public String bye(Model model) {
         model.addAttribute("message", "bye bye!");
-        return "/index.jsp";
+        return "/bye.jsp";
     }
 
     /* 也可以直接用 @PostMapping 省去method = RequestMethod.POST*/
