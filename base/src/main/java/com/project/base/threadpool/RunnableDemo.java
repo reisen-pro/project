@@ -5,7 +5,7 @@ package com.project.base.threadpool;
  */
 public class RunnableDemo implements Runnable {
 
-    private static int sum = 50;
+    private static int sum = 100000;
 
     private final Object object;
 
@@ -23,11 +23,15 @@ public class RunnableDemo implements Runnable {
     public void run() {
         while (true) {
             synchronized (object) {
-
-                System.out.println(name + " " + sum);
-                if (sum < 1) {
+                if (sum <= 0) {
                     break;
                 }
+                try {
+                    Thread.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(name + " " + sum);
                 sum--;
             }
         }
