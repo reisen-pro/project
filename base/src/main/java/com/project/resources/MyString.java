@@ -1,6 +1,7 @@
 package com.project.resources;
 
-import org.springframework.core.codec.StringDecoder;
+
+import com.project.base.reference.M;
 
 import java.io.ObjectStreamField;
 import java.io.Serializable;
@@ -8,7 +9,6 @@ import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
-import java.nio.charset.IllegalCharsetNameException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
@@ -17,6 +17,8 @@ import java.util.Arrays;
  * 实现序列化 是为了网络传输
  * 比较接口<>
  * 字符序列
+ *
+ * @see java.lang.String
  */
 public class MyString implements Serializable, Comparable<MyString>, CharSequence {
 
@@ -50,7 +52,17 @@ public class MyString implements Serializable, Comparable<MyString>, CharSequenc
     }
 
     /**
+     * 补一个String的构造，用于测试。
+     *
+     * @param val
+     */
+    public MyString(String val) {
+        this.value = getCharByBytes(val.getBytes());
+    }
+
+    /**
      * byte数组转换成char数组
+     *
      * @param bytes
      * @return
      */
@@ -156,6 +168,7 @@ public class MyString implements Serializable, Comparable<MyString>, CharSequenc
      * 分配一个新字符串，该字符串包含当前在字符串缓冲区参数中包含的字符序列。
      * 字符串缓冲区的内容被复制；
      * 字符串缓冲区的后续修改不会影响新创建的字符串。
+     *
      * @param buffer
      */
     public MyString(StringBuffer buffer) {
@@ -167,52 +180,224 @@ public class MyString implements Serializable, Comparable<MyString>, CharSequenc
 
     /**
      * 这个就不需要加锁
+     *
      * @param builder
      */
     public MyString(StringBuilder builder) {
         this.value = Arrays.copyOf(getCharByBytes(builder.toString().getBytes()), builder.length());
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 包下私有的构造方法
+     * 快速的复制值数组 share aways true
+     * 性能好  一个是逐一拷贝。当然是直接赋值快了。
+     * 共享内部数组节约内存
+     * 设置成public 就破坏了字符串的不可变性。
+     * 缺点，可能造成内存泄漏
+     *
+     * @param value
+     * @param share
+     */
+    MyString(char[] value, boolean share) {
+        // assert share : "unshared not supported";
+        this.value = value;
+    }
 
     @Override
     public int length() {
-        return 0;
+        return this.value.length;
+    }
+
+    public boolean isEmpty() {
+        return value.length == 0;
     }
 
     @Override
     public char charAt(int index) {
-        return 0;
+        if ((index < 0) || (index >= value.length)) {
+            throw new StringIndexOutOfBoundsException(index);
+        }
+        return value[index];
+    }
+
+    /**
+     * 字节数组
+     *
+     * @return
+     */
+    public byte[] getBytes() {
+        // return StringCoding.encode(value, 0, value.length);
+        return new String(value).getBytes();
+    }
+
+    /**
+     * 重写equals
+     *
+     * @param anObject
+     * @return
+     */
+    public boolean equals(Object anObject) {
+        if (this == anObject) {
+            return true;
+        }
+        // 首先对类型进行匹配判断
+        if (anObject instanceof MyString) {
+            MyString anotherString = (MyString) anObject;
+            int n = value.length;
+            if (n == anotherString.value.length) {
+                char[] v1 = value;
+                char[] v2 = anotherString.value;
+                int i = 0;
+                // 逐个比较数组里面的值
+                while (n-- != 0) {
+                    if (v1[i] != v2[i])
+                        return false;
+                    i++;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int compareTo(MyString o) {
+        int len1 = value.length;
+        int len2 = o.value.length;
+        int lim = Math.min(len1, len2);
+        char[] v1 = value;
+        char[] v2 = o.value;
+
+        int k = 0;
+        while (k < lim) {
+            char c1 = v1[k];
+            char c2 = v2[k];
+            if (c1 != c2) {
+                return c1 - c2;
+            }
+            k++;
+        }
+        return len1 - len2;
+    }
+
+    /**
+     * 在string中 这个比较方法在一个内部类 CaseInsensitiveComparator 中
+     * string的 compareToIgnoreCase 方法会返回次方法
+     *
+     * @param s1
+     * @param s2
+     * @return
+     */
+    public static int compare(MyString s1, MyString s2) {
+        int n1 = s1.length();
+        int n2 = s2.length();
+        // 求的比较小的那个字符串的长度
+        int min = Math.min(n1, n2);
+        for (int i = 0; i < min; i++) {
+            char c1 = s1.charAt(i);
+            char c2 = s2.charAt(i);
+            // 这里大写比较了一次 然后再小写比较了一次
+            // 原因是有一些字符，两个小写不同的字符可能大写以后是一个字符
+            // 所以大写比较一次 小写再比较一次
+            if (c1 != c2) {
+                c1 = Character.toUpperCase(c1);
+                c2 = Character.toUpperCase(c2);
+                if (c1 != c2) {
+                    c1 = Character.toLowerCase(c1);
+                    c2 = Character.toLowerCase(c2);
+                    if (c1 != c2) {
+                        // No overflow because of numeric promotion
+                        return c1 - c2;
+                    }
+                }
+            }
+        }
+        return n1 - n2;
+    }
+
+    /**
+     * @param prefix
+     * @param toffset
+     * @return
+     */
+    public boolean startsWith(MyString prefix, int toffset) {
+        char[] val1 = this.value;
+        char[] val2 = prefix.value;
+        int preLen = prefix.value.length;
+        int start = 0;
+        if (toffset < 0 || toffset > val1.length - preLen) {
+            return false;
+        }
+        while (--preLen >= 0) {
+            if (val1[toffset++] != val2[start++]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean endsWith(MyString suffix) {
+        return startsWith(suffix, value.length - suffix.value.length);
+    }
+
+    public boolean startsWith(MyString prefix) {
+        return startsWith(prefix, 0);
+    }
+
+    public int indexOf(int ch) {
+        return indexOf(ch, 0);
+    }
+
+    public int indexOf(int ch, int fromIndex) {
+        final int max = value.length;
+        if (fromIndex < 0) {
+            fromIndex = 0;
+        } else if (fromIndex >= max) {
+            // Note: fromIndex might be near -1>>>1.
+            return -1;
+        }
+
+        // 小于一万
+        if (ch < Character.MIN_SUPPLEMENTARY_CODE_POINT) {
+            // handle most cases here (ch is a BMP code point or a
+            // negative value (invalid code point))
+            final char[] value = this.value;
+            // 循环去判断 返回数组下标
+            for (int i = fromIndex; i < max; i++) {
+                if (value[i] == ch) {
+                    return i;
+                }
+            }
+            return -1;
+        } else {
+            // 大于等于10000个字符
+            return indexOfSupplementary(ch, fromIndex);
+        }
+    }
+
+    private int indexOfSupplementary(int ch, int fromIndex) {
+        // Character.isValidCodePoint(ch)
+        int plane = fromIndex >>> 16;
+        if (plane < ((0X10FFFF + 1) >>> 16)) {
+            final char[] value = this.value;
+            final char hi = Character.highSurrogate(ch);
+            final char lo = Character.lowSurrogate(ch);
+            final int max = value.length - 1;
+            for (int i = fromIndex; i < max; i++) {
+                if (value[i] == hi && value[i + 1] == lo) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        MyString a = new MyString("hello");
+        System.out.println(a.startsWith(new MyString("he")));
+        System.out.println(a.endsWith(new MyString("lo")));
+
+        System.out.println(a.hashCode());
     }
 
     @Override
@@ -220,8 +405,16 @@ public class MyString implements Serializable, Comparable<MyString>, CharSequenc
         return null;
     }
 
-    @Override
-    public int compareTo(MyString o) {
-        return 0;
+    public int hashCode() {
+        int h = hash;
+        if (h == 0 && value.length > 0) {
+            char val[] = value;
+
+            for (int i = 0; i < value.length; i++) {
+                h = 31 * h + val[i];
+            }
+            hash = h;
+        }
+        return h;
     }
 }
