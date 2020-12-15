@@ -11,6 +11,7 @@ import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * 根据String的源码模仿自定义的String类
@@ -336,16 +337,75 @@ public class MyString implements Serializable, Comparable<MyString>, CharSequenc
         return true;
     }
 
+    /**
+     * 判断时候以 suffix为结尾
+     *
+     * @param suffix
+     * @return
+     */
     public boolean endsWith(MyString suffix) {
         return startsWith(suffix, value.length - suffix.value.length);
     }
 
+    /**
+     * 判断是否以prefix开头
+     *
+     * @param prefix
+     * @return
+     */
     public boolean startsWith(MyString prefix) {
         return startsWith(prefix, 0);
     }
 
     public int indexOf(int ch) {
         return indexOf(ch, 0);
+    }
+
+    public int indexOf(MyString str) {
+        return indexOf(str, 0);
+    }
+
+    public int indexOf(MyString str, int fromIndex) {
+        return indexOf(value, 0, value.length, str.value, 0, str.value.length, fromIndex);
+    }
+
+    static int indexOf(char[] source, int sourceOffset, int sourceCount,
+                       char[] target, int targetOffset, int targetCount,
+                       int fromIndex) {
+        if (fromIndex >= sourceCount) {
+            return (targetCount == 0 ? sourceCount : -1);
+        }
+        if (fromIndex < 0) {
+            fromIndex = 0;
+        }
+        if (targetCount == 0) {
+            return fromIndex;
+        }
+
+        char first = target[targetOffset];
+        int max = sourceOffset + (sourceCount - targetCount);
+
+        for (int i = sourceOffset + fromIndex; i <= max; i++) {
+            /* Look for first character. */
+            if (source[i] != first) {
+                while (++i <= max && source[i] != first) ;
+            }
+
+            /* Found first character, now look at the rest of v2 */
+            if (i <= max) {
+                int j = i + 1;
+                int end = j + targetCount - 1;
+                for (int k = targetOffset + 1; j < end && source[j]
+                        == target[k]; j++, k++)
+                    ;
+
+                if (j == end) {
+                    /* Found whole string. */
+                    return i - sourceOffset;
+                }
+            }
+        }
+        return -1;
     }
 
     public int indexOf(int ch, int fromIndex) {
@@ -375,9 +435,17 @@ public class MyString implements Serializable, Comparable<MyString>, CharSequenc
         }
     }
 
+    /**
+     * 当字符串长度大于等于1w个字符时
+     *
+     * @param ch
+     * @param fromIndex
+     * @return
+     */
     private int indexOfSupplementary(int ch, int fromIndex) {
         // Character.isValidCodePoint(ch)
         int plane = fromIndex >>> 16;
+        // 没有超过Integer的最大值
         if (plane < ((0X10FFFF + 1) >>> 16)) {
             final char[] value = this.value;
             final char hi = Character.highSurrogate(ch);
@@ -393,10 +461,10 @@ public class MyString implements Serializable, Comparable<MyString>, CharSequenc
     }
 
     public static void main(String[] args) {
+        System.out.println(new Date(1604160000000L).toLocaleString());
         MyString a = new MyString("hello");
         System.out.println(a.startsWith(new MyString("he")));
         System.out.println(a.endsWith(new MyString("lo")));
-
         System.out.println(a.hashCode());
     }
 
@@ -409,7 +477,6 @@ public class MyString implements Serializable, Comparable<MyString>, CharSequenc
         int h = hash;
         if (h == 0 && value.length > 0) {
             char val[] = value;
-
             for (int i = 0; i < value.length; i++) {
                 h = 31 * h + val[i];
             }
@@ -417,4 +484,6 @@ public class MyString implements Serializable, Comparable<MyString>, CharSequenc
         }
         return h;
     }
+
+
 }

@@ -11,6 +11,7 @@
         <module>demo</module>
         <module>mall</module>
         <module>spring</module>
+        <module>cache</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
