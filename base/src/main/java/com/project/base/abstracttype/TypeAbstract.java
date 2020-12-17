@@ -1,6 +1,7 @@
 package com.project.base.abstracttype;
 
 /**
+ * 抽象类
  * @author Reisen
  */
 public abstract class TypeAbstract {
@@ -14,6 +15,6 @@ public abstract class TypeAbstract {
     }
 
     void print(String str) {
-        System.out.println("父类print" + str);
+        System.out.println("父类print：" + str);
     }
 }

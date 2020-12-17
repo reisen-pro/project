@@ -10,26 +10,26 @@ public class BasicDataTypes {
     /**
      * 基本数据类型
      */
-    private static int anInt = 0;
-    private static long aLong = 0L;
-    private static short aShort = 0;
-    private static byte aByte = 0;
-    private static double aDouble = 0.0;
-    private static float aFloat = 0.0F;
-    private static boolean aBoolean = false;
-    private static char aChar = '0';
+    private static final int anInt = 0;
+    private static final long aLong = 0L;
+    private static final short aShort = 0;
+    private static final byte aByte = 0;
+    private static final double aDouble = 0.0;
+    private static final float aFloat = 0.0F;
+    private static final boolean aBoolean = false;
+    private static final char aChar = '0';
 
     /**
      * 包装后
      */
-    private static Integer anInt1 = 0;
-    private static Long aLong1 = 0L;
-    private static Short aShort1 = 0;
-    private static Byte aByte1 = 0;
-    private static Double aDouble1 = 0.0;
-    private static Float aFloat1 = 0.0F;
-    private static Boolean aBoolean1 = false;
-    private static Character aChar1 = '0';
+    private static final Integer anInt1 = 0;
+    private static final Long aLong1 = 0L;
+    private static final Short aShort1 = 0;
+    private static final Byte aByte1 = 0;
+    private static final Double aDouble1 = 0.0;
+    private static final Float aFloat1 = 0.0F;
+    private static final Boolean aBoolean1 = false;
+    private static final Character aChar1 = '0';
 
     /**
      * 常用方法
