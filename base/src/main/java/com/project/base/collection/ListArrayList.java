@@ -3,6 +3,7 @@ package com.project.base.collection;
 import java.io.Serializable;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
@@ -56,6 +57,25 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
      */
     public ListArrayList() {
         this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+    }
+
+    @Override
+    public E get(int index) {
+        rangeCheck(index);
+        return this.elementData(index);
+    }
+
+    E elementData(int index) {
+        return (E) elementData[index];
+    }
+
+    private void rangeCheck(int index) {
+        if (index >= size)
+            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+    }
+
+    private String outOfBoundsMsg(int index) {
+        return "Index: "+index+", Size: "+size();
     }
 
     /**
@@ -310,7 +330,7 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
         }
     }
 
-    private class ListItr extends ListArrayList.Itr implements ListIterator<E> {
+    private class ListItr extends Itr implements ListIterator<E> {
         ListItr(int index) {
             super();
             cursor = index;
@@ -421,7 +441,8 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
             rangeCheckForAdd(index);
             checkForComodification();
             parent.add(parentOffset + index, e);
-            this.modCount = parent.modCount;
+            // 被保护的
+            // this.modCount = parent.modCount;
             this.size++;
         }
 
@@ -429,16 +450,18 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
             rangeCheck(index);
             checkForComodification();
             E result = parent.remove(parentOffset + index);
-            this.modCount = parent.modCount;
+            // 被保护的
+            // this.modCount = parent.modCount;
             this.size--;
             return result;
         }
 
         protected void removeRange(int fromIndex, int toIndex) {
             checkForComodification();
-            parent.removeRange(parentOffset + fromIndex,
+            // 被保护的
+/*            parent.removeRange(parentOffset + fromIndex,
                     parentOffset + toIndex);
-            this.modCount = parent.modCount;
+            this.modCount = parent.modCount;*/
             this.size -= toIndex - fromIndex;
         }
 
@@ -454,7 +477,7 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
 
             checkForComodification();
             parent.addAll(parentOffset + index, c);
-            this.modCount = parent.modCount;
+            // this.modCount = parent.modCount;
             this.size += cSize;
             return true;
         }
@@ -609,7 +632,7 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
 
         public Spliterator<E> spliterator() {
             checkForComodification();
-            return new ListArrayList.ArrayListSpliterator<E>(ArrayList.this, offset,
+            return new ListArrayList.ArrayListSpliterator<E>(ListArrayList.this, offset,
                     offset + this.size, this.modCount);
         }
     }
@@ -638,7 +661,6 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
     public Object[] toArray() {
         return Arrays.copyOf(elementData, size);
     }
-
 
     @Override
     public int indexOf(Object o) {
@@ -720,7 +742,7 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
 
         public void forEachRemaining(Consumer<? super E> action) {
             int i, hi, mc; // hoist accesses and checks from loop
-            ArrayList<E> lst;
+            ListArrayList<E> lst;
             Object[] a;
             if (action == null)
                 throw new NullPointerException();

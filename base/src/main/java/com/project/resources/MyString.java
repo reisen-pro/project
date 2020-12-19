@@ -484,6 +484,4 @@ public class MyString implements Serializable, Comparable<MyString>, CharSequenc
         }
         return h;
     }
-
-
 }

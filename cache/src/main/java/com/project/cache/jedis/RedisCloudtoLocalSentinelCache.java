@@ -36,7 +36,7 @@ public class RedisCloudtoLocalSentinelCache extends Pool<Jedis> {
 
     protected final Logger log = Logger.getLogger(RedisCloudtoLocalSentinelCache.class);
 
-    private volatile JedisFactory factory;
+    // private volatile JedisFactory factory;
 
     private volatile HostAndPort currentHostMaster;
 
@@ -97,7 +97,7 @@ public class RedisCloudtoLocalSentinelCache extends Pool<Jedis> {
     private void initPool(HostAndPort master) {
         if (!master.equals(currentHostMaster)) {
             currentHostMaster = master;
-            if (factory == null) {
+/*            if (factory == null) {
                 factory = new JedisFactory(master.getHost(), master.getPort(),
                         timeout, timeout, password, database,null); // TODO 使用临时包 升级到2.8.2，此处构建方法新增入参
                 initPool(poolConfig, factory);
@@ -108,7 +108,7 @@ public class RedisCloudtoLocalSentinelCache extends Pool<Jedis> {
                 // in getResource, this call only clears idle instances, not
                 // borrowed instances
                 internalPool.clear();
-            }
+            }*/
 
             log.info("Created JedisPool to master at " + master);
         }
@@ -198,7 +198,7 @@ public class RedisCloudtoLocalSentinelCache extends Pool<Jedis> {
     public Jedis getResource() {
         while (true) {
             Jedis jedis = super.getResource();
-            jedis.setDataSource(this);
+            //jedis.setDataSource(this);
 
             // get a reference because it can change concurrently
             final HostAndPort master = currentHostMaster;
