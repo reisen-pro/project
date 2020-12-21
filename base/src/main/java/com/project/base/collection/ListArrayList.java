@@ -75,7 +75,7 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
     }
 
     private String outOfBoundsMsg(int index) {
-        return "Index: "+index+", Size: "+size();
+        return "Index: " + index + ", Size: " + size();
     }
 
     /**
@@ -259,7 +259,8 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
         int lastRet = -1; // index of last element returned; -1 if no such
         int expectedModCount = modCount;
 
-        Itr() { }
+        Itr() {
+        }
 
         public boolean hasNext() {
             return cursor != size;
@@ -362,10 +363,10 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
         }
 
         public void set(E e) {
-            if (lastRet < 0)
+            if (lastRet < 0) {
                 throw new IllegalStateException();
+            }
             checkForComodification();
-
             try {
                 ListArrayList.this.set(lastRet, e);
             } catch (IndexOutOfBoundsException ex) {
@@ -375,7 +376,6 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
 
         public void add(E e) {
             checkForComodification();
-
             try {
                 int i = cursor;
                 ListArrayList.this.add(i, e);
@@ -388,19 +388,28 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
         }
     }
 
+
     public List<E> subList(int fromIndex, int toIndex) {
         subListRangeCheck(fromIndex, toIndex, size);
         return new ListArrayList.SubList(this, 0, fromIndex, toIndex);
     }
 
+    /**
+     * 对基础数值进行检查
+     * @param fromIndex
+     * @param toIndex
+     * @param size
+     */
     static void subListRangeCheck(int fromIndex, int toIndex, int size) {
-        if (fromIndex < 0)
+        if (fromIndex < 0) {
             throw new IndexOutOfBoundsException("fromIndex = " + fromIndex);
-        if (toIndex > size)
+        }
+        if (toIndex > size) {
             throw new IndexOutOfBoundsException("toIndex = " + toIndex);
-        if (fromIndex > toIndex)
-            throw new IllegalArgumentException("fromIndex(" + fromIndex +
-                    ") > toIndex(" + toIndex + ")");
+        }
+        if (fromIndex > toIndex) {
+            throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
+        }
     }
 
     private class SubList extends AbstractList<E> implements RandomAccess {

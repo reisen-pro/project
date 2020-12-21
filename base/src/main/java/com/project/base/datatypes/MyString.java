@@ -1,7 +1,5 @@
-package com.project.resources;
+package com.project.base.datatypes;
 
-
-import com.project.base.reference.M;
 
 import java.io.ObjectStreamField;
 import java.io.Serializable;
@@ -19,7 +17,7 @@ import java.util.Date;
  * 比较接口<>
  * 字符序列
  *
- * @see java.lang.String
+ * @see String
  */
 public class MyString implements Serializable, Comparable<MyString>, CharSequence {
 
