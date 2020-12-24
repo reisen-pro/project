@@ -353,11 +353,13 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
         public E previous() {
             checkForComodification();
             int i = cursor - 1;
-            if (i < 0)
+            if (i < 0) {
                 throw new NoSuchElementException();
+            }
             Object[] elementData = ListArrayList.this.elementData;
-            if (i >= elementData.length)
+            if (i >= elementData.length) {
                 throw new ConcurrentModificationException();
+            }
             cursor = i;
             return (E) elementData[lastRet = i];
         }
@@ -396,6 +398,7 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
 
     /**
      * 对基础数值进行检查
+     *
      * @param fromIndex
      * @param toIndex
      * @param size
@@ -675,12 +678,14 @@ public class ListArrayList<E> extends AbstractList<E> implements List<E>, Random
     public int indexOf(Object o) {
         if (o == null) {
             for (int i = 0; i < size; i++)
-                if (elementData[i] == null)
+                if (elementData[i] == null) {
                     return i;
+                }
         } else {
             for (int i = 0; i < size; i++)
-                if (o.equals(elementData[i]))
+                if (o.equals(elementData[i])) {
                     return i;
+                }
         }
         return -1;
     }
