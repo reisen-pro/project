@@ -1,7 +1,7 @@
-package com.project.springboot.controller;
+package com.project.springboot.webflux.controller;
 
-import com.project.springboot.entity.City;
-import com.project.springboot.handler.CityHandler;
+import com.project.springboot.webflux.entity.City;
+import com.project.springboot.webflux.handler.CityHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;

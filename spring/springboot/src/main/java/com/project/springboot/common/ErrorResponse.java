@@ -19,7 +19,10 @@ public class ErrorResponse {
     }
 
     public ErrorResponse(Exception e) {
-
+        this.code = -1;
+        this.status = -1;
+        this.message = e.getMessage();
+        this.timestamp = Instant.now();
     }
 
     public ErrorResponse(BaseException ex, String path) {

@@ -1,4 +1,4 @@
-package com.project.springboot.entity;
+package com.project.springboot.webflux.entity;
 
 public class City {
     /**

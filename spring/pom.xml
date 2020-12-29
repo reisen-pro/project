@@ -15,6 +15,7 @@
         <module>spring-base</module>
         <module>spring-mvc</module>
         <module>springboot</module>
+        <module>springboot-webflux</module>
     </modules>
 
 

@@ -1,7 +1,7 @@
-package com.project.springboot.handler;
+package com.project.springboot.webflux.handler;
 
-import com.project.springboot.dao.CityRepository;
-import com.project.springboot.entity.City;
+import com.project.springboot.webflux.dao.CityRepository;
+import com.project.springboot.webflux.entity.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;

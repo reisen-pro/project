@@ -1,6 +1,6 @@
-package com.project.springboot.dao;
+package com.project.springboot.webflux.dao;
 
-import com.project.springboot.entity.City;
+import com.project.springboot.webflux.entity.City;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
