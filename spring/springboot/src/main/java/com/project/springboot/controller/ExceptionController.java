@@ -1,8 +1,6 @@
 package com.project.springboot.controller;
 
 import com.project.springboot.exception.ResourceNotFoundException;
-import com.project.springboot.exception.ResourceNotFoundExceptionByAnnotation;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
