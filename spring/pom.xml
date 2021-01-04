@@ -16,6 +16,7 @@
         <module>spring-mvc</module>
         <module>springboot</module>
         <module>springboot-webflux</module>
+        <module>springboot-security-jwt</module>
     </modules>
 
 

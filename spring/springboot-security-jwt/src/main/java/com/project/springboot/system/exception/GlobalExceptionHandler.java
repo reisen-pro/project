@@ -1,0 +1,72 @@
+package com.project.springboot.system.exception;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
+
+/**
+ * 全局异常处理
+ * 包括基本异常信息处理
+ * 和几种业务异常信息处理
+ */
+@ControllerAdvice
+@ResponseBody
+@Slf4j
+public class GlobalExceptionHandler {
+
+    /**
+     * 指定为BaseException类型
+     * @param ex 异常信息
+     * @param request http请求
+     * @return ResponseEntity
+     */
+    @ExceptionHandler(BaseException.class)
+    public ResponseEntity<ErrorResponse> handleBaseException(BaseException ex, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(ex, request.getRequestURI());
+        log.error("occur BaseException:" + errorResponse.toString());
+        return ResponseEntity.status(ex.getErrorCode().getStatus()).body(errorResponse);
+    }
+
+    /**
+     * 请求参数异常处理
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex, HttpServletRequest request) {
+        Map<String, Object> errors = new HashMap<>(8);
+        ex.getBindingResult().getAllErrors().forEach(error -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        ErrorResponse errorResponse = new ErrorResponse(ErrorCode.METHOD_ARGUMENT_NOT_VALID, request.getRequestURI(), errors);
+        log.error("occur MethodArgumentNotValidException:" + errorResponse.toString());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(value = UserNameAlreadyExistException.class)
+    public ResponseEntity<ErrorResponse> handleUserNameAlreadyExistException(UserNameAlreadyExistException ex, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(ex, request.getRequestURI());
+        log.error("occur UserNameAlreadyExistException:" + errorResponse.toString());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(value = {RoleNotFoundException.class, UserNameNotFoundException.class})
+    public ResponseEntity<ErrorResponse> handleUserNotFoundException(BaseException ex, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(ex, request.getRequestURI());
+        log.error("occur ResourceNotFoundException:" + errorResponse.toString());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+
+}
