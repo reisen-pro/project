@@ -1,6 +1,7 @@
 package com.project.springboot.system.config;
 
 import com.project.springboot.security.common.constans.SecurityConstants;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -15,10 +16,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *
  * @description swagger 相关配置
  */
-@Configuration
+@SpringBootConfiguration
 public class SwaggerConfig {
 
     @Bean
@@ -54,7 +54,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Spring Security JWT Guide")
+                .title("Spring Security JWT")
                 .build();
     }
 

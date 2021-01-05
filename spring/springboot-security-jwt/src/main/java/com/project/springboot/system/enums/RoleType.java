@@ -16,4 +16,13 @@ public enum RoleType {
         this.name = name;
         this.description = description;
     }
+
+    public String getRoleDesc(String name) {
+        for (RoleType value : RoleType.values()) {
+            if (value.getName().equals(name)) {
+                return value.getDescription();
+            }
+        }
+        return null;
+    }
 }

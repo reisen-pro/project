@@ -37,19 +37,39 @@ public class UserService {
 
     @Transactional(rollbackFor = Exception.class)
     public void save(UserRegisterRequest userRegisterRequest) {
+        // 校验用户名是否已存在
         ensureUserNameNotExist(userRegisterRequest.getUserName());
+
         User user = userRegisterRequest.toUser();
+        // 密码加密
         user.setPassword(bCryptPasswordEncoder.encode(userRegisterRequest.getPassword()));
+        // 保存用户信息
         userRepository.save(user);
+
         //给用户绑定两个角色：用户和管理者
-        Role studentRole = roleRepository.findByName(RoleType.USER.getName()).orElseThrow(() -> new RoleNotFoundException(ImmutableMap.of("roleName", RoleType.USER.getName())));
-        Role managerRole = roleRepository.findByName(RoleType.MANAGER.getName()).orElseThrow(() -> new RoleNotFoundException(ImmutableMap.of("roleName", RoleType.MANAGER.getName())));
+        Role studentRole =
+                // 寻找名为USER的角色
+                roleRepository.findByName(RoleType.USER.getName())
+                        .orElseThrow(
+                                () -> new RoleNotFoundException(ImmutableMap.of("roleName", RoleType.USER.getName()))
+                        );
+
+        Role managerRole =
+                roleRepository.findByName(RoleType.MANAGER.getName())
+                        .orElseThrow(
+                                () -> new RoleNotFoundException(ImmutableMap.of("roleName", RoleType.MANAGER.getName()))
+                        );
+
         userRoleRepository.save(new UserRole(user, studentRole));
         userRoleRepository.save(new UserRole(user, managerRole));
     }
 
     public User find(String userName) {
-        return userRepository.findByUserName(userName).orElseThrow(() -> new UserNameNotFoundException(ImmutableMap.of(USERNAME, userName)));
+        // ImmutableMap 简单的说就是一个不可变的map
+        return userRepository.findByUserName(userName)
+                .orElseThrow(
+                        () -> new UserNameNotFoundException(ImmutableMap.of(USERNAME, userName))
+                );
     }
 
     public void update(UserUpdateRequest userUpdateRequest) {

@@ -5,9 +5,13 @@ import org.springframework.util.ObjectUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * 定义基础的异常
+ */
 abstract class BaseException extends RuntimeException {
+    // 错误编码
     private final ErrorCode errorCode;
+    // 用于返回的数据
     private final transient HashMap<String, Object> data = new HashMap<>();
 
     BaseException(ErrorCode errorCode, Map<String, Object> data) {

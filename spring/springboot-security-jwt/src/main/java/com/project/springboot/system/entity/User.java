@@ -39,15 +39,20 @@ public class User extends AbstractAuditBase {
     private List<UserRole> userRoles = new ArrayList<>();
 
     public List<SimpleGrantedAuthority> getRoles() {
+        // 角色列表
         List<Role> roles = userRoles.stream().map(UserRole::getRole).collect(Collectors.toList());
+        // 授权的集合
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        // 把角色信息添加到集合中
         roles.forEach(role -> authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName())));
         return authorities;
     }
 
     public UserRepresentation toUserRepresentation() {
-        return UserRepresentation.builder().fullName(this.fullName)
-                .userName(this.userName).build();
+        return UserRepresentation.builder()
+                .fullName(this.fullName)
+                .userName(this.userName)
+                .build();
     }
 
 }

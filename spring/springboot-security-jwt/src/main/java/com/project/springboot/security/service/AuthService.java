@@ -17,6 +17,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+/**
+ * 权限服务
+ * BadCredentialsException 错误的凭证
+ */
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AuthService {
@@ -25,11 +29,14 @@ public class AuthService {
     private final CurrentUserUtils currentUserUtils;
 
     public String getToken(LoginRequest loginRequest) {
+        // 先根据用户名查询用户
         User user = userService.find(loginRequest.getUsername());
+        // 检查用户密码是否匹配
         if (!userService.check(loginRequest.getPassword(), user.getPassword())) {
             throw new BadCredentialsException("The user name or password is not correct.");
         }
         JwtUser jwtUser = new JwtUser(user);
+        // 用户是否生效
         if (!jwtUser.isEnabled()) {
             throw new BadCredentialsException("User is forbidden to log in");
         }
@@ -37,11 +44,16 @@ public class AuthService {
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
+        // 根据登录的用户信息生成token
         String token = JwtTokenUtils.createToken(user.getUserName(), user.getId().toString(), authorities, loginRequest.getRememberMe());
+        // 保存到redis中
         stringRedisTemplate.opsForValue().set(user.getId().toString(), token);
         return token;
     }
 
+    /**
+     * 将redis中的token删除
+     */
     public void deleteTokenFromRedis() {
         stringRedisTemplate.delete(currentUserUtils.getCurrentUser().getId().toString());
     }

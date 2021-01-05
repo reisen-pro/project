@@ -2,12 +2,11 @@ package com.project.springboot.system.config;
 
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
 /**
- *
+ * redisTemplate
  */
 @SpringBootConfiguration
 public class RedisConfig {
