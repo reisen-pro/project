@@ -35,9 +35,9 @@ public class SysInfoUtil {
         long physicalTotal = osmxb.getTotalPhysicalMemorySize() / mb;
         long physicalUse = physicalTotal - physicalFree;
         System.out.println("操作系统的版本：" + os);
-        System.out.println("操作系统物理内存的空闲的空间为：" + physicalFree + " MB");
-        System.out.println("操作系统物理内存的已用的空间为：" + physicalUse + " MB");
-        System.out.println("操作系统总物理内存：" + physicalTotal + " MB");
+        System.out.println("操作系统内存的空闲的空间为：" + physicalFree + " MB");
+        System.out.println("操作系统内存的已用的空间为：" + physicalUse + " MB");
+        System.out.println("操作系统总内存：" + physicalTotal + " MB");
     }
 
     static void printThreadInfo() {
