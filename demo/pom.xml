@@ -25,5 +25,17 @@
             <artifactId>jol-core</artifactId>
             <version>0.9</version>
         </dependency>
+
+        <!-- apache bean拷贝工具 -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
     </dependencies>
 </project>
