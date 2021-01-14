@@ -16,6 +16,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /**
  * @AutoConfigureMockMvc 该注解表示 MockMvc由spring容器构建，你只负责注入之后用就可以了。这种写法是为了让测试在Spring容器环境下执行。
+ *
+ * 参考地址：
+ * https://reflectoring.io/bean-validation-with-spring-boot/
  */
 @SpringBootTest
 @AutoConfigureMockMvc

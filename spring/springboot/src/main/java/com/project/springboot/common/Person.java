@@ -1,5 +1,7 @@
 package com.project.springboot.common;
 
+import com.project.springboot.annotation.PhoneNumber;
+import com.project.springboot.annotation.Region;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -55,4 +57,10 @@ public class Person {
     @NotNull(message = "email 不能为空")
     private String email;
 
+    @Region
+    private String region;
+
+    @PhoneNumber(message = "phoneNumber 格式不正确")
+    @NotNull(message = "phoneNumber 不能为空")
+    private String phoneNumber;
 }
