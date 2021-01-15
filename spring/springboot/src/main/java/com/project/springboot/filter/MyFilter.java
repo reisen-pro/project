@@ -23,7 +23,7 @@ public class MyFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        log.info(getClass().getSimpleName() + "doFilter!!!!!!!!!!");
+        log.info(getClass().getSimpleName() + " doFilter!!!!!!!!!!");
         //对请求进行预处理
         log.info("过滤器开始对请求进行预处理");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
