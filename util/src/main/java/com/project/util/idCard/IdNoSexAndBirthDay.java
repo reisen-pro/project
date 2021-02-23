@@ -26,9 +26,4 @@ public class IdNoSexAndBirthDay {
         }
         return year + "年" + month + "月" + day + "日";
     }
-
-    public static void main(String[] args) {
-        System.out.println(getSex(""));
-        System.out.println(getBirthday(""));
-    }
 }

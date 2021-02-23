@@ -2,17 +2,18 @@ package com.project.jdbc.controller;
 
 import com.project.jdbc.dao.UserDao_jpa;
 import com.project.jdbc.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
 public class UserController_jpa {
-    @Resource
+    @Autowired
+    @Qualifier("userDao_jpa")
     private UserDao_jpa userDao;
 
     /**

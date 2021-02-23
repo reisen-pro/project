@@ -78,10 +78,4 @@ public class AesUtil {
         }
         return originalString;
     }
-
-    // 简单测试
-    public static void main(String[] args) {
-        System.out.println(AesUtil.encrypt("1234567891123456"));
-        System.out.println(AesUtil.decrypt("NwruFWQ7zBgQrjFz9c0sHFW+tveQy3afYV1g2Tr2Y70="));
-    }
 }

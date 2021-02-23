@@ -1,5 +1,6 @@
 package com.project.util.connect;
 
+import cn.hutool.db.Db;
 import lombok.Data;
 
 import java.io.File;
@@ -8,6 +9,8 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 import com.project.util.PropertiesUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 数据库操作工具类：封装连接的获取以及资源的释放等通用操作
@@ -134,5 +137,4 @@ public class DbUtil {
         }
 
     }
-
 }

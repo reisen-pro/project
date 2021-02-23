@@ -28,55 +28,46 @@
 // strs[i] 仅由小写英文字母组成 
 // 
 // Related Topics 字符串 
-// 👍 1462 👎 0
+// 👍 1464 👎 0
 
 
 package com.project.util.leetcode.leetcode.editor.cn;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
 
 //Java：最长公共前缀
-class P14LongestCommonPrefix {
+class P14LongestCommonPrefix{
     public static void main(String[] args) {
         Solution solution = new P14LongestCommonPrefix().new Solution();
-        solution.longestCommonPrefix(new String[]{"flower", "flow", "flight"});
+        solution.longestCommonPrefix(new String[]{"cir","car"});
         // TO TEST
     }
-
     //leetcode submit region begin(Prohibit modification and deletion)
-    class Solution {
-        public String longestCommonPrefix(String[] strs) {
-            if (strs.length == 0 || strs.length > 200) {
-                return "";
-            }
-            if (strs.length == 1) {
-                return strs[0];
-            }
-
-            HashMap<Integer, String> map = new HashMap<Integer, String>();
-            TreeSet<Integer> set = new TreeSet<Integer>();
-            for (String str : strs) {
-                set.add(str.length());
-                map.put(str.length(), str);
-            }
-            // 最小的字符串
-            String minStr = map.get(set.first());
-            int i = 1;
-            int k = 0;
-            int l = strs.length;
-            for (String str : strs) {
-                String result = minStr.substring(0, i);
-                k++;
-                if (k%l == 0) {i++;}
-                if (!str.startsWith(result)) {
-                    return str.substring(0,i-1);
-                }
-            }
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0){
             return "";
         }
-//leetcode submit region end(Prohibit modification and deletion)
+        if (strs.length == 1){
+            return strs[0];
+        }
+        // 最小字符串的长度
+        int len = strs[0].length();
+        String result = "";
+        for (String str : strs) {
+            if (str.length() <= len){
+                len = str.length();
+                result = str;
+            }
+        }
+        // 不停的剪短，直到都匹配
+        for (String str : strs) {
+            while (!str.startsWith(result)){
+                result = result.substring(0,result.length()-1);
+            }
+        }
+        return result;
     }
+}
+//leetcode submit region end(Prohibit modification and deletion)
+
 }

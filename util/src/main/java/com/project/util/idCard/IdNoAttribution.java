@@ -18,7 +18,4 @@ public class IdNoAttribution {
         System.out.println(properties.get(code));
         return (String) properties.get(code);
     }
-    public static void main(String[] args) {
-        System.out.println(getAttribution("320323"));
-    }
 }

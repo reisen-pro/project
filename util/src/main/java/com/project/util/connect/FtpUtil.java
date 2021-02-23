@@ -188,16 +188,4 @@ public class FtpUtil {
             }
         }
     }
-
-    public static void main(String[] args) throws IOException {
-        FtpUtil ftpUtil = new FtpUtil("192.168.37.129", 21);
-        String userName = "ftpuser";
-        ftpUtil.setUsername(userName);
-        ftpUtil.setPassword("123456");
-        ftpUtil.connect();
-        ftpUtil.login();
-        File file = new File("D:\123.jpg");
-        ftpUtil.upload("", file);
-        ftpUtil.close();
-    }
 }

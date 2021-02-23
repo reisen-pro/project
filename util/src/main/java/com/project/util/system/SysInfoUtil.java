@@ -97,12 +97,4 @@ public class SysInfoUtil {
         System.out.println("JVM总内存空间为：" + total + " MB");
         System.out.println("JVM总内存空间为：" + max + " MB");
     }
-
-
-    public static void main(String[] args) {
-        printSystemInfo();
-        printDiskInfo();
-        printRunTimeMemoryInfo();
-        printThreadInfo();
-    }
 }

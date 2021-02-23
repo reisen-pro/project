@@ -35,9 +35,4 @@ public class IdNoLastNum {
         String[] lastNumList = RemainderConversion.split("－");
         return lastNumList[lastNum];
     }
-
-    public static void main(String[] args) {
-        // 求身份证最后一位
-        System.out.println(lastNum(""));
-    }
 }

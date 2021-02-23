@@ -24,8 +24,6 @@ public class WebServiceUtil {
      * @return object[]
      */
     public static Object[] invoke(String url, String operationName, Object reqDTO) {
-
-
         if (url != null && !url.trim().endsWith(WSDL)) {
             url = url + "?" + WSDL;
         }
@@ -40,9 +38,5 @@ public class WebServiceUtil {
             log.info("调用过程中发生异常");
         }
         return objects;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(System.currentTimeMillis());
     }
 }

@@ -2,6 +2,8 @@ package com.project.jdbc.controller;
 
 import com.project.jdbc.dao.UserDao;
 import com.project.jdbc.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -11,7 +13,8 @@ import javax.annotation.Resource;
  */
 @RestController
 public class UserController {
-    @Resource
+    @Autowired
+    @Qualifier("userDao")
     private UserDao dao;
 
     /**

@@ -1,7 +1,6 @@
 package com.project.springboot.controller;
 
 import com.project.springboot.service.AsyncService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,5 +33,19 @@ public class AsyncController {
         // 打印结果以及运行程序运行花费时间
         System.out.println("Elapsed time: " + (System.currentTimeMillis() - start));
         return results.toString();
+    }
+
+    @GetMapping("/movies/quick")
+    public String completableFutureTaskQuick() throws ExecutionException, InterruptedException {
+        // Start the clock
+        long start = System.currentTimeMillis();
+        // Kick of multiple, asynchronous lookups
+        List<String> words = Arrays.asList("F", "T", "S", "Z", "J", "C");
+        words.stream()
+                .forEach(word -> asyncService.completableFutureTaskQuick(word));
+        // Wait until they are all done
+        // Print results, including elapsed time
+        System.out.println("Elapsed time: " + (System.currentTimeMillis() - start));
+        return "Done";
     }
 }

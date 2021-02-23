@@ -39,14 +39,4 @@ public class JsonUtil {
         }
         return "";
     }
-
-
-    public static void main(String[] args) {
-        String testJson = "[{\"id\":1,\"username\":\"name\",\"password\":\"123456\","
-                + "\"createDate\":\"2020-05-24 01:46:41\",\"modifyDate\":\"2020-05-24 01:46:46\"}]";
-        JsonUtil util = new JsonUtil();
-        util.JsonToMap(testJson);
-        Map map = util.map;
-        System.out.println(map.get("modifyDate"));
-    }
 }
