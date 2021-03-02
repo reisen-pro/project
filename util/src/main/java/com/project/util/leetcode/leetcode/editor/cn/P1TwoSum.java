@@ -42,7 +42,7 @@
 // 👍 10293 👎 0
 
 
-package leetcode.editor.cn;
+package com.project.util.leetcode.leetcode.editor.cn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
