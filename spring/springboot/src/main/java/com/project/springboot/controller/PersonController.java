@@ -18,6 +18,7 @@ import javax.validation.constraints.Size;
 @RequestMapping("/api")
 public class PersonController {
 
+
     @PostMapping("/person")
     public ResponseEntity<Person> getPerson(@RequestBody @Valid Person person) {
         return ResponseEntity.ok().body(person);
