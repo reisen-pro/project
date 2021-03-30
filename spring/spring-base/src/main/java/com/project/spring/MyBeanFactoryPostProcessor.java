@@ -9,7 +9,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
  * @author Reisen
  * @title: MyBeanFactoryPostProcessor
  * @projectName project
- * @description: TODO
+ * @description: 这里举一个案例比如说将自动注入为false，设置自动装配类型为byname
  * @date 2021/1/9 12:49
  */
 public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
@@ -20,5 +20,14 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
         System.getProperties();
 
         BeanDefinition beanDefinition = beanFactory.getBeanDefinition("");
+
+        if (beanFactory.containsBean("integrationGlobalProperties")){
+            // Choose on of the options - either disable autowiring for bean completly,
+            // or change autowiring type
+            beanFactory.getBeanDefinition("integrationGlobalProperties").setAutowireCandidate(false);
+
+            // BeanCreationException
+            beanFactory.getBeanDefinition("integrationGlobalProperties").setAttribute("autowire", "byName");
+        }
     }
 }
