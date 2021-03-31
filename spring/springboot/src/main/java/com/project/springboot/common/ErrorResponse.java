@@ -7,11 +7,15 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 用于返回错误信息的载体
+ */
 public class ErrorResponse {
     private int code;
     private int status;
     private String message;
     private String path;
+    // jdk1.8的时刻类
     private Instant timestamp;
     private HashMap<String, Object> data = new HashMap<String, Object>();
 

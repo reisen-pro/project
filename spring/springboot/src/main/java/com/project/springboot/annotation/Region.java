@@ -11,6 +11,7 @@ import java.lang.annotation.*;
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
+// 指定被约束的类
 @Constraint(validatedBy = RegionValidator.class)
 @Documented
 public @interface Region {

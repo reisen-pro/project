@@ -10,13 +10,18 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * 过滤器的配置类
+ */
 @SpringBootConfiguration
 public class MyFilterConfig {
+    // 注入自己的过滤类
     @Resource
-    MyFilter myFilter;
+    private MyFilter myFilter;
 
+    // 注解的方式的过滤类
     @Resource
-    MyFilterWithAnnotation myFilterWithAnnotation;
+    private MyFilterWithAnnotation myFilterWithAnnotation;
 
     @Bean
     public FilterRegistrationBean<MyFilter> thirdFilter() {

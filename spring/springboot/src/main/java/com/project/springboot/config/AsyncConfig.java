@@ -32,13 +32,16 @@ import java.util.concurrent.ThreadPoolExecutor;
 @EnableAsync
 public class AsyncConfig implements AsyncConfigurer {
 
+    // 核心线程数量
     private static final int CORE_POOL_SIZE = 3;
+    // 最大线程数量
     private static final int MAX_POOL_SIZE = 10;
+    // 队列容量
     private static final int QUEUE_CAPACITY = 100;
 
     /**
      * 创建一个任务执行者
-     * @return
+     * @return Executor
      */
     @Bean
     public Executor taskExecutor() {

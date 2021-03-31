@@ -22,7 +22,7 @@ public class ScheduledTasks {
      * fixedRate：固定速率执行。每5秒执行一次。
      */
     @Async
-    @Scheduled(fixedRate = 5000)
+    //@Scheduled(fixedRate = 5000)
     public void reportCurrentTimeWithFixedRate() {
         log.info("Current Thread : {}", Thread.currentThread().getName());
         log.info("Fixed Rate Task : The time is now {}", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));

@@ -13,6 +13,7 @@ public class RegionValidator implements ConstraintValidator<Region, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        // 匹配规则。
         HashSet<Object> regions = new HashSet<>();
         regions.add("China");
         regions.add("China-Taiwan");

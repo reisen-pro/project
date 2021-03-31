@@ -14,7 +14,7 @@ public class Test {
         TestController testController = new TestController();
         Class<? extends TestController> clazz = testController.getClass();
 
-        // 获取所有属性
+        // 获取所有属性 使用getfields，只能获取到public的 使用declaredfields可以获取所有属性
         Stream.of(clazz.getDeclaredFields()).forEach(field -> {
             // 判断属性是否有注解
             Autowired annotation = field.getAnnotation(Autowired.class);

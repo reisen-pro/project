@@ -1,13 +1,15 @@
 package com.project.springboot.lnterceptor;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 日志拦截器的使用
+ */
 @Slf4j
 public class LogInterceptor extends HandlerInterceptorAdapter {
     /**
