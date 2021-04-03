@@ -10,7 +10,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.LongAdder;
 import java.util.function.Function;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -78,7 +80,7 @@ public class CurrentHashMapController {
     private Map<String, Long> normaluse() throws InterruptedException {
         ConcurrentHashMap<String, Long> freps = new ConcurrentHashMap<>(ITEM_COUNT);
         ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
-        forkJoinPool.execute(() -> IntStream.rangeClosed(1, LOOP_COUNT).parallel().forEach( i -> {
+        forkJoinPool.execute(() -> IntStream.rangeClosed(1, LOOP_COUNT).parallel().forEach(i -> {
                     // 获得一个随机的key
                     String key = "item" + ThreadLocalRandom.current().nextInt(ITEM_COUNT);
                     synchronized (freps) {
@@ -94,5 +96,30 @@ public class CurrentHashMapController {
         forkJoinPool.shutdown();
         forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
         return freps;
+    }
+
+    /**
+     * 使用ConcurrentHashMap的原子性方法 computeIfAbsent 来做复合逻辑操作，判断key是否存在value
+     * 如果不存在则把lambda表达式运行后的结果放入map作为value，也就是创建一个LongAdder对象，最后返回Value
+     * @return map
+     * @throws InterruptedException 中断异常
+     */
+    @GetMapping("gooduse")
+    private Map<String, Long> gooduse() throws InterruptedException {
+        ConcurrentHashMap<String, LongAdder> freps = new ConcurrentHashMap<>(ITEM_COUNT);
+        ForkJoinPool forkJoinPool = new ForkJoinPool(THREAD_COUNT);
+        forkJoinPool.execute(() -> IntStream.rangeClosed(1, LOOP_COUNT).parallel().forEach(i -> {
+                    // 获得一个随机的key
+                    String key = "item" + ThreadLocalRandom.current().nextInt(ITEM_COUNT);
+                    freps.computeIfAbsent(key, k -> new LongAdder()).increment();
+                }
+        ));
+        forkJoinPool.shutdown();
+        forkJoinPool.awaitTermination(1, TimeUnit.HOURS);
+        // 因为我们的value不是LongAdder而不是Long,所以需要做一次转换才能返回
+        return freps.entrySet().stream().collect(Collectors.toMap(
+                e -> e.getKey(),
+                e -> e.getValue().longValue())
+        );
     }
 }
