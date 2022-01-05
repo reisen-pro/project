@@ -28,7 +28,6 @@ import java.util.*;
 public class P136SingleNumber {
     public static void main(String[] args) {
         //测试代码
-        //参考了一下解题思路，用亦或简单明了
         Solution solution = new P136SingleNumber().new Solution();
         solution.singleNumber(new int[]{1, 2, 1});
     }
@@ -37,16 +36,11 @@ public class P136SingleNumber {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int singleNumber(int[] nums) {
-            Set set = new HashSet();
-
+            int result = 0;
             for (int num : nums) {
-                if (!set.contains(num)) {
-                    set.add(num);
-                } else {
-                    set.remove(num);
-                }
+                result = result ^ num;
             }
-            return (int) set.iterator().next();
+            return result;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
