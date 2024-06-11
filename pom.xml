@@ -12,7 +12,6 @@
         <module>mall</module>
         <module>spring</module>
         <module>cache</module>
-        <module>mybatis</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
