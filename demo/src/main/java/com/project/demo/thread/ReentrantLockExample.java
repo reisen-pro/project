@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ReentrantLockExample {
     // 创建一个ReentrantLock对象
-    private final Lock lock = new ReentrantLock();
+    private final Lock lock = new ReentrantLock(true);
 
     public void commonMethod() throws InterruptedException {
         // 尝试获取锁，最多等待2秒，如果2秒内无法获取锁，则放弃
@@ -62,15 +62,19 @@ public class ReentrantLockExample {
         // 创建两个线程来演示ReentrantLock的使用
         Thread thread1 = new Thread(() -> {
             try {
-                example.commonMethodWithRetry();
+                Thread.sleep(100000);
+                //example.commonMethodWithRetry();
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                System.out.printf("1111111111111111111111");
+                //throw new RuntimeException(e);
             }
         });
         Thread thread2 = new Thread(() -> {
             try {
-                example.commonMethodWithRetry();
-            } catch (InterruptedException e) {
+                Thread.sleep(100);
+                thread1.interrupt();
+                //example.commonMethodWithRetry();
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });
