@@ -1,5 +1,7 @@
 package com.project.spring.annotation;
 
+import javax.annotation.Resource;
+import java.lang.annotation.Annotation;
 import java.util.stream.Stream;
 
 /**
@@ -17,6 +19,10 @@ public class Test {
         // 获取所有属性 使用getfields，只能获取到public的 使用declaredfields可以获取所有属性
         Stream.of(clazz.getDeclaredFields()).forEach(field -> {
             // 判断属性是否有注解
+            Annotation[] annotations = field.getAnnotations();
+            for (Annotation annotation : annotations) {
+                System.out.println(annotation.getClass());
+            }
             Autowired annotation = field.getAnnotation(Autowired.class);
             if (annotation != null) {
                 field.setAccessible(true);
@@ -28,6 +34,11 @@ public class Test {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+
+            Resource resourceAnnotation = field.getAnnotation(Resource.class);
+            if (resourceAnnotation != null) {
+                System.out.println(resourceAnnotation.name());
             }
         });
 

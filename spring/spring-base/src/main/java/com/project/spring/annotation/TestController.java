@@ -1,5 +1,7 @@
 package com.project.spring.annotation;
 
+import javax.annotation.Resource;
+
 /**
  * @author Reisen
  * @title: TestController
@@ -10,6 +12,9 @@ package com.project.spring.annotation;
 public class TestController {
     @Autowired
     private TestService testService;
+
+    @Resource(name = "testService2")
+    private TestService testService2;
 
     public TestService getTestService() {
         return testService;
